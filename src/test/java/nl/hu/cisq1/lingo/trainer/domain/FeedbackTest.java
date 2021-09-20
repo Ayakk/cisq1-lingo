@@ -1,5 +1,6 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import com.sun.xml.bind.v2.TODO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,4 +25,17 @@ class FeedbackTest {
         assertFalse(f.isWordGuessed(f));
     }
 
+    @Test
+    @DisplayName("given word is invalid")
+    void guessIsInvalid(){
+        Feedback f = new Feedback("hek", List.of(Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID));
+        assertTrue(f.wordIsInvalid(f));
+    }
+
+    @Test
+    @DisplayName("given word is not invalid")
+    void guessIsNotInvalid(){
+        Feedback f = new Feedback("woord", List.of(Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID));
+        assertFalse(f.wordIsInvalid(f));
+    }
 }

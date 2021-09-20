@@ -17,8 +17,20 @@ public class Feedback {
         PRESENT
     }
 
+    public String getAttempt() {
+        return attempt;
+    }
+
+    public void setAttempt(String attempt) {
+        this.attempt = attempt;
+    }
+
     public List<Mark> getMarkList() {
         return markList;
+    }
+
+    public void setMarkList(List<Mark> markList) {
+        this.markList = markList;
     }
 
     public boolean isWordGuessed(Feedback feedback){
@@ -27,6 +39,15 @@ public class Feedback {
             if (!m.equals(Mark.CORRECT)){
                 b = false;
             }
+        }
+        return b;
+    }
+
+    public boolean wordIsInvalid(Feedback feedback){
+        boolean b = false;
+        String word = feedback.getAttempt();
+        if (word.length() < 4 || word.length() > 6){
+            b = true;
         }
         return b;
     }
