@@ -13,6 +13,8 @@ public class Feedback {
     public enum Mark{
         INVALID,
         CORRECT,
+        ABSENT,
+        PRESENT
     }
 
     public List<Mark> getMarkList() {
