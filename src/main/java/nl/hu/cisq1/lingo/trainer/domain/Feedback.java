@@ -93,7 +93,6 @@ public class Feedback {
             i++;
         }
 
-
         String s = "";
         System.out.println("HASH VALUES: \n "+hintList.values());
         for (String a : hintList.values()){

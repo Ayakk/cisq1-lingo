@@ -4,9 +4,13 @@ import com.sun.xml.bind.v2.TODO;
 import nl.hu.cisq1.lingo.words.domain.exception.InvalidFeedbackException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import javax.validation.constraints.AssertTrue;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,7 +55,15 @@ class FeedbackTest {
     @Test
     @DisplayName("Give hint")
     void giveHintTest(){
-        Feedback f = new Feedback("woord", List.of(Feedback.Mark.CORRECT, Feedback.Mark.ABSENT, Feedback.Mark.ABSENT, Feedback.Mark.ABSENT, Feedback.Mark.ABSENT));
-        assertEquals("W....", f.giveHint(f));
+        Feedback f = new Feedback("woord", List.of(Feedback.Mark.CORRECT, Feedback.Mark.ABSENT, Feedback.Mark.ABSENT, Feedback.Mark.CORRECT, Feedback.Mark.ABSENT));
+        assertEquals("W..R.", f.giveHint(f));
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideHintExamples")
+    static Stream<Arguments> provideHintExamples() {
+        return Stream.of(
+                Arguments.of(A, B, C),
+                Arguments.of(D, E, F));
     }
 }
