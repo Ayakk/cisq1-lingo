@@ -5,12 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 public class Feedback {
     private String attempt;
     private List<Mark> markList;
+    private HashMap<Integer, String> hintList = new HashMap<Integer, String>();
 
     public Feedback(String attempt, List<Mark> markList) {
         this.attempt = attempt;
@@ -65,9 +67,10 @@ public class Feedback {
     public String giveHint(Feedback feedback){
         String att = feedback.getAttempt();
         List<String> emptylist = new ArrayList<String>();
-        List<String> hintList = new ArrayList<String>();
+
         List<Mark> markL = feedback.getMarkList();
-        Hint h = new Hint(hintList);
+
+
         for (char c : att.toCharArray()){
             emptylist.add(String.valueOf(c));
         }
@@ -78,10 +81,29 @@ public class Feedback {
             throw new InvalidFeedbackException();
         }
 
+        int i = 0;
         for (Mark m : markL){
-            
+            if (m.equals(Mark.CORRECT)){
+                hintList.put(i, emptylist.get(i).toUpperCase());
+            }else if (m.equals(Mark.PRESENT)){
+                hintList.put(i, "#");
+            } else {
+                hintList.put(i, ".");
+            }
+            i++;
         }
-        return "";
+
+
+        String s = "";
+        System.out.println("HASH VALUES: \n "+hintList.values());
+        for (String a : hintList.values()){
+            if (!a.equals("")){
+                s+=a;
+            }else {
+                s+=".";
+            }
+        }
+        return s;
     }
 
     @Override
