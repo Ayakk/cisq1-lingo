@@ -1,5 +1,9 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.words.domain.exception.InvalidFeedbackException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -35,13 +39,17 @@ public class Feedback {
     }
 
     public boolean isWordGuessed(Feedback feedback){
-        boolean b = true;
-        for(Mark m : feedback.getMarkList()){
-            if (!m.equals(Mark.CORRECT)){
-                b = false;
+        try{
+            boolean b = true;
+            for(Mark m : feedback.getMarkList()){
+                if (!m.equals(Mark.CORRECT)){
+                    b = false;
+                }
             }
+            return b;
+        }catch (InvalidFeedbackException exception){
+            throw new RuntimeException(exception.getMessage());
         }
-        return b;
     }
 
     public boolean wordIsInvalid(Feedback feedback){
