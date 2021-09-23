@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FeedbackTest {
     //TODO make the lists length automatically generated
+
     @Test
     @DisplayName("Word is guessed if all letters are correct")
     void wordIsGuessed(){
@@ -36,7 +37,7 @@ class FeedbackTest {
     @Test
     @DisplayName("given word is not invalid")
     void guessIsNotInvalid(){
-        Feedback f = new Feedback("woord", List.of(Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID));
+        Feedback f = new Feedback("woord", List.of(Feedback.Mark.PRESENT, Feedback.Mark.PRESENT, Feedback.Mark.PRESENT, Feedback.Mark.PRESENT, Feedback.Mark.PRESENT));
         assertFalse(f.wordIsInvalid(f));
     }
 }
