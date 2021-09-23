@@ -47,4 +47,11 @@ class FeedbackTest {
     void InvalidFeedbackExceptionCheck(){
         assertThrows(InvalidFeedbackException.class, () -> new Feedback("woord", List.of(Feedback.Mark.CORRECT)));
     }
+
+    @Test
+    @DisplayName("Give hint")
+    void giveHintTest(){
+        Feedback f = new Feedback("woord", List.of(Feedback.Mark.CORRECT, Feedback.Mark.ABSENT, Feedback.Mark.ABSENT, Feedback.Mark.ABSENT, Feedback.Mark.ABSENT));
+        assertEquals("W....", f.giveHint(f));
+    }
 }

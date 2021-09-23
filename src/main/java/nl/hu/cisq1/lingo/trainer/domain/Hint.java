@@ -1,20 +1,17 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 public class Hint {
-    private List<String> hintList;
+    HashMap<Integer, String> hintList = new HashMap<Integer, String>();
 
-    public Hint(List<String> hintList) {
-        this.hintList = hintList;
-    }
-
-    public List<String> getHintList() {
+    public HashMap<Integer, String> getHintList() {
         return hintList;
     }
 
-    public void setHintList(List<String> hintList) {
+    public void setHintList(HashMap<Integer, String> hintList) {
         this.hintList = hintList;
     }
 
