@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Feedback {
     private String attempt;
@@ -50,5 +51,27 @@ public class Feedback {
             b = true;
         }
         return b;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Feedback feedback = (Feedback) o;
+        return Objects.equals(attempt, feedback.attempt) &&
+                Objects.equals(markList, feedback.markList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(attempt, markList);
+    }
+
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "attempt='" + attempt + '\'' +
+                ", markList=" + markList +
+                '}';
     }
 }
