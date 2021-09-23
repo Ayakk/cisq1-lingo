@@ -43,8 +43,8 @@ class FeedbackTest {
     }
 
     @Test
-    @DisplayName("Test exception")
-    void ExceptionTest(){
+    @DisplayName("Test Invalid Feedback length")
+    void InvalidFeedbackExceptionCheck(){
         assertThrows(    InvalidFeedbackException.class, () -> new Feedback("woord", List.of(Feedback.Mark.CORRECT)));
     }
 }
