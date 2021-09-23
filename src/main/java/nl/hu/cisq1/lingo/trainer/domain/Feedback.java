@@ -43,48 +43,52 @@ public class Feedback {
 
     public boolean isWordGuessed(Feedback feedback){
         try{
-            boolean b = true;
+            //is Guessed starts on true
+            boolean isGuessed = true;
+            //for loop checks if ifGuessed should be put to false
             for(Mark m : feedback.getMarkList()){
+                //checks if all marks are correct, if not isGuessed = false
                 if (!m.equals(Mark.CORRECT)){
-                    b = false;
+                    isGuessed = false;
                 }
             }
-            return b;
+            return isGuessed;
         }catch (InvalidFeedbackException exception){
             throw new RuntimeException(exception.getMessage());
         }
     }
 
     public boolean wordIsInvalid(Feedback feedback){
-        boolean b = false;
+        boolean isInvalid = false;
         String word = feedback.getAttempt();
+        //if the word length is outside what is allowed isInvalid will become true
         if (word.length() < 4 || word.length() > 6){
-            b = true;
+            isInvalid = true;
         }
-        return b;
+        return isInvalid;
     }
 
     public String giveHint(Feedback feedback){
-        String att = feedback.getAttempt();
-        List<String> emptylist = new ArrayList<String>();
-
+        String attemptString = feedback.getAttempt();
+        List<String> attemptStringtoList = new ArrayList<String>();
         List<Mark> markL = feedback.getMarkList();
 
-
-        for (char c : att.toCharArray()){
-            emptylist.add(String.valueOf(c));
+        //for loop converts attemptString to an array of chars
+        for (char c : attemptString.toCharArray()){
+            //put string value of attempt in arraylist
+            attemptStringtoList.add(String.valueOf(c));
         }
-        System.out.println("CONTENT emptylist: \n" + emptylist);
+        System.out.println("CONTENT attemptStringtoList: \n" + attemptStringtoList);
         System.out.println("CONTENT marklist: \n" + markL);
 
-        if (att.length() != markL.size()){
+        if (attemptString.length() != markL.size()){
             throw new InvalidFeedbackException();
         }
 
         int i = 0;
         for (Mark m : markL){
             if (m.equals(Mark.CORRECT)){
-                hintList.put(i, emptylist.get(i).toUpperCase());
+                hintList.put(i, attemptStringtoList.get(i).toUpperCase());
             }else if (m.equals(Mark.PRESENT)){
                 hintList.put(i, "#");
             } else {
