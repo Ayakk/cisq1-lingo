@@ -14,6 +14,10 @@ public class Feedback {
     private List<Mark> markList;
     private HashMap<Integer, String> hintList = new HashMap<Integer, String>();
 
+    public Feedback(){
+
+    }
+
     public Feedback(String attempt, List<Mark> markList) {
         this.attempt = attempt;
         this.markList = markList;
