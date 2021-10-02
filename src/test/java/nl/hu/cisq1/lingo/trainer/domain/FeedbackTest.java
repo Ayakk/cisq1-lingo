@@ -63,7 +63,10 @@ class FeedbackTest {
     @MethodSource("provideHintExamples")
     static Stream<Arguments> provideHintExamples() {
         return Stream.of(
-                Arguments.of(A, B, C),
-                Arguments.of(D, E, F));
+                Arguments.of(Feedback.Mark.CORRECT, Feedback.Mark.CORRECT, Feedback.Mark.CORRECT),
+                Arguments.of(Feedback.Mark.CORRECT, Feedback.Mark.PRESENT, Feedback.Mark.ABSENT),
+                Arguments.of(Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID),
+                Arguments.of(Feedback.Mark.INVALID, Feedback.Mark.INVALID, Feedback.Mark.INVALID),
+                Arguments.of(Feedback.Mark.ABSENT, Feedback.Mark.ABSENT, Feedback.Mark.ABSENT));
     }
 }
