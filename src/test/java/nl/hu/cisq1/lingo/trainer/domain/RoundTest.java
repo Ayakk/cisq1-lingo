@@ -22,7 +22,7 @@ class RoundTest {
     void checkIfRoundHasStarted(){
         Round r = new Round();
         r.startRound();
-        assertTrue(r.getRoundStatus);
+        assertTrue(r.getRoundStatus());
     }
 
 }

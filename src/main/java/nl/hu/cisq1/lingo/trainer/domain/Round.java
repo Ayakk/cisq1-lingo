@@ -17,6 +17,14 @@ public class Round {
         return f;
     }
 
+    public boolean getRoundStatus() {
+        return roundStatus;
+    }
+
+    public void setRoundStatus(boolean roundStatus) {
+        this.roundStatus = roundStatus;
+    }
+
     public void setF(Feedback f) {
         this.f = f;
     }
@@ -33,6 +41,10 @@ public class Round {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.next();
         return userInput;
+    }
+
+    public void startRound(){
+        roundStatus = true;
     }
 
 }
