@@ -17,4 +17,12 @@ class RoundTest {
         assertEquals("woordje", r.getW().getToGuessWord());
     }
 
+    @Test
+    @DisplayName("Test if the status boolean is changed when a new round starts")
+    void checkIfRoundHasStarted(){
+        Round r = new Round();
+        r.startRound();
+        assertTrue(r.getRoundStatus);
+    }
+
 }
