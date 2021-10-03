@@ -6,6 +6,7 @@ public class Round {
     private boolean roundStatus;
     private Feedback f;
     private Word w;
+    private int attempts = 0;
 
     public Round() {
         roundStatus = false;
@@ -44,13 +45,19 @@ public class Round {
     }
 
     public void startRound(){
-        roundStatus = true;
         boolean wordGuessed = false;
         String word = w.getToGuessWord();
 
-        while (wordGuessed = false){
-
+        if (wordGuessed != true && roundStatus != true){
+            while (attempts <=5){
+                attempts++;
+//                String guess = getUserInput();
+                String guess = "woord";
+                f.setAttempt(guess);
+                f.setW(w);
+                f.giveBetterHint();
+            }
         }
+        roundStatus = true;
     }
-
 }

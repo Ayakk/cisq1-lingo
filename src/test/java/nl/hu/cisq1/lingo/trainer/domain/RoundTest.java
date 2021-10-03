@@ -25,4 +25,11 @@ class RoundTest {
         assertTrue(r.getRoundStatus());
     }
 
+    @Test
+    @DisplayName("Check if round plays correctly")
+    void checkIfRoundPlaysCorrectly(){
+        Round r = new Round();
+        r.startRound();
+    }
+
 }
