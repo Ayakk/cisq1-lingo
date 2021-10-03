@@ -45,6 +45,12 @@ public class Round {
 
     public void startRound(){
         roundStatus = true;
+        boolean wordGuessed = false;
+        String word = w.getToGuessWord();
+
+        while (wordGuessed = false){
+
+        }
     }
 
 }

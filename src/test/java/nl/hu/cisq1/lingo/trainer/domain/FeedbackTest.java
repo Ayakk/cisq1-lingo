@@ -59,6 +59,13 @@ class FeedbackTest {
         assertEquals("W..R.", f.giveHint(f));
     }
 
+    @Test
+    @DisplayName("Give hint")
+    void giveBetterHintTest(){
+        Feedback f = new Feedback("woord");
+        assertEquals("W..R.", f.giveBetterHint());
+    }
+
     @ParameterizedTest
     @MethodSource("provideHintExamples")
     static Stream<Arguments> provideHintExamples() {

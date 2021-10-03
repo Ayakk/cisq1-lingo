@@ -4,18 +4,21 @@ import nl.hu.cisq1.lingo.words.domain.exception.InvalidFeedbackException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Feedback {
     private String attempt;
     private List<Mark> markList;
     private HashMap<Integer, String> hintList = new HashMap<Integer, String>();
+    private Word w;
 
     public Feedback(){
 
+    }
+
+    public Feedback(String attempt) {
+        this.attempt = attempt;
     }
 
     public Feedback(String attempt, List<Mark> markList) {
@@ -31,6 +34,50 @@ public class Feedback {
 
     public String getAttempt() {
         return attempt;
+    }
+
+    public List<Mark> giveBetterHint(){
+        HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
+        HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
+        List<Mark> markL = new ArrayList<Mark>();
+
+        String s = "";
+
+        for (int i = 0; i < getAttempt().length(); i++){
+            char c = getAttempt().charAt(i);
+            //Process char
+            guessHolder.put(i, c);
+        }
+
+        for (int i = 0; i < w.getToGuessWord().length(); i++){
+            char c = w.getToGuessWord().charAt(i);
+            //Process char
+            attemptHolder.put(i, c);
+        }
+
+        if (guessHolder.equals(attemptHolder)){
+            for (int i = 0; i < guessHolder.size(); i++){
+                markL.add(Mark.CORRECT);
+            }
+        } else if (guessHolder.size() != attemptHolder.size()){
+            for (int i = 0; i < guessHolder.size(); i++)
+                markL.add(Mark.INVALID);
+        }else {
+            for (int i = 0; i < guessHolder.size(); i++){
+                if (guessHolder.get(i).equals(attemptHolder.get(i))){
+
+                }
+            }
+        }
+
+    }
+
+    public Word getW() {
+        return w;
+    }
+
+    public void setW(Word w) {
+        this.w = w;
     }
 
     public void setAttempt(String attempt) {
@@ -71,6 +118,7 @@ public class Feedback {
         }
         return isInvalid;
     }
+
 
     public String giveHint(Feedback feedback){
         String attemptString = feedback.getAttempt();
