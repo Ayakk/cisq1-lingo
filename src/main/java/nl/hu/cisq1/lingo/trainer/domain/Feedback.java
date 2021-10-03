@@ -41,8 +41,10 @@ public class Feedback {
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
         List<Mark> markL = new ArrayList<Mark>();
+        System.out.println("Attempt: " + getAttempt());
+        System.out.println("ToGuessWord: " + w.getToGuessWord());
 
-        String s = "";
+        String returnString = "";
 
         for (int i = 0; i < getAttempt().length(); i++){
             char c = getAttempt().charAt(i);
@@ -74,19 +76,22 @@ public class Feedback {
                 }
             }
         }
-
+        setMarkList(markL);
         for (int i = 0; i < markL.size(); i++){
             if (markL.get(i).equals(Mark.CORRECT)){
-                s += String.valueOf(guessHolder.get(i)).toUpperCase();
+                returnString += String.valueOf(guessHolder.get(i)).toUpperCase();
             } else if (markL.get(i).equals(Mark.PRESENT)){
-                s += "#";
-            } else{
-                s += ".";
+                returnString += "#";
+            } else if (markL.get(i).equals(Mark.INVALID)){
+                returnString += "X";
+            }
+            else{
+                returnString += ".";
             }
         }
         System.out.println("Attempt was: " + attempt);
-        System.out.println("Feedback was: " + s);
-        return s;
+        System.out.println("Feedback was: " + returnString);
+        return returnString;
     }
 
     public Word getW() {
