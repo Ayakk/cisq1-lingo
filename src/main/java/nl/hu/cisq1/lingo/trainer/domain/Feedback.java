@@ -19,6 +19,7 @@ public class Feedback {
 
     public Feedback(String attempt) {
         this.attempt = attempt;
+        w = new Word("woord");
     }
 
     public Feedback(String attempt, List<Mark> markList) {
@@ -36,7 +37,7 @@ public class Feedback {
         return attempt;
     }
 
-    public List<Mark> giveBetterHint(){
+    public String giveBetterHint(){
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
         List<Mark> markL = new ArrayList<Mark>();
@@ -64,12 +65,28 @@ public class Feedback {
                 markL.add(Mark.INVALID);
         }else {
             for (int i = 0; i < guessHolder.size(); i++){
-                if (guessHolder.get(i).equals(attemptHolder.get(i))){
-
+                if (attemptHolder.get(i).equals(guessHolder.get(i))){
+                    markL.add(Mark.CORRECT);
+                } else if (attemptHolder.containsValue(guessHolder.get(i))){
+                    markL.add(Mark.PRESENT);
+                } else{
+                    markL.add(Mark.ABSENT);
                 }
             }
         }
 
+        for (int i = 0; i < markL.size(); i++){
+            if (markL.get(i).equals(Mark.CORRECT)){
+                s += String.valueOf(guessHolder.get(i)).toUpperCase();
+            } else if (markL.get(i).equals(Mark.PRESENT)){
+                s += "#";
+            } else{
+                s += ".";
+            }
+        }
+        System.out.println("Attempt was: " + attempt);
+        System.out.println("Feedback was: " + s);
+        return s;
     }
 
     public Word getW() {

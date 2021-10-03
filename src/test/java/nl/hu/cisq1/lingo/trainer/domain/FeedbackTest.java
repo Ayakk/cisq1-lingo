@@ -62,8 +62,8 @@ class FeedbackTest {
     @Test
     @DisplayName("Give hint")
     void giveBetterHintTest(){
-        Feedback f = new Feedback("woord");
-        assertEquals("W..R.", f.giveBetterHint());
+        Feedback f = new Feedback("wodro");
+        assertEquals("WO#R#", f.giveBetterHint());
     }
 
     @ParameterizedTest
