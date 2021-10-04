@@ -8,47 +8,44 @@ public class Round {
     private Word w;
     private int attempts = 0;
 
-    public Round() {
+    public Round(Feedback feedback) {
         roundStatus = false;
         f = new Feedback();
     }
 
-    public Feedback getF() {
-        return f;
-    }
+//    public Feedback getF() {
+//        return f;
+//    }
+//
+//    public boolean getRoundStatus() {
+//        return roundStatus;
+//    }
+//
+//    public void setRoundStatus(boolean roundStatus) {
+//        this.roundStatus = roundStatus;
+//    }
+//
+//    public void setF(Feedback f) {
+//        this.f = f;
+//    }
+//
+//    public Word getW() {
+//        return w;
+//    }
+//
+//    public void setW(Word w) {
+//        this.w = w;
+//    }
 
-    public boolean getRoundStatus() {
-        return roundStatus;
-    }
 
-    public void setRoundStatus(boolean roundStatus) {
-        this.roundStatus = roundStatus;
-    }
 
-    public void setF(Feedback f) {
-        this.f = f;
-    }
-
-    public Word getW() {
-        return w;
-    }
-
-    public void setW(Word w) {
-        this.w = w;
-    }
-
-    public String getUserInput(){
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.next();
-        return userInput;
-    }
 
 //    public String useUserInput(){
 //        getUserInput();
 //
 //    }
 
-    public void startRound(){
+    public void startRound(String attempt){
         boolean wordGuessed = false;
         w = new Word("woord");
         String word = w.getToGuessWord();

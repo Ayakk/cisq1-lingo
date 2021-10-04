@@ -19,11 +19,10 @@ class RoundTest {
     }
 
     @Test
-    @DisplayName("Test if the status boolean is changed when a new round starts")
-    void checkIfRoundHasStarted(){
+    @DisplayName("Test if the status boolean is false before a round starts")
+    void checkRoundStatus(){
         Round r = new Round();
-        r.startRound();
-        assertTrue(r.getRoundStatus());
+        assertFalse(r.getRoundStatus());
     }
 
     @Test
@@ -33,8 +32,13 @@ class RoundTest {
         Feedback feedback = new Feedback();
         feedback.setAttempt("woard");
         r.setF(feedback);
-        r.startRound();
+//        r.startRound();
         assertTrue(r.getRoundStatus());
     }
 
+    @Test
+    void testStartRonde(){
+        Round round = new Round();
+        round.startRound("woord");
+    }
 }

@@ -23,7 +23,7 @@ public class Feedback {
         this.attempt = attempt;
         this.markList = markList;
     }
-    public enum Mark{
+    public enum Mark{ //todo eigen bestand
         INVALID,
         CORRECT,
         ABSENT,
@@ -55,7 +55,7 @@ public class Feedback {
     }
 
     public boolean isWordGuessed(Feedback feedback){
-        try{
+        try{ //TODO geen try catch nodig--> check opdracht named constructor
             //is Guessed starts on true
             boolean isGuessed = true;
             //for loop checks if ifGuessed should be put to false
@@ -142,48 +142,6 @@ public class Feedback {
             }
         }
         return returnString;
-    }
-
-
-    public String giveHint(Feedback feedback){
-        String attemptString = feedback.getAttempt();
-        List<String> attemptStringtoList = new ArrayList<String>();
-        List<Mark> markL = feedback.getMarkList();
-
-        //for loop converts attemptString to an array of chars
-        for (char c : attemptString.toCharArray()){
-            //put string value of attempt in arraylist
-            attemptStringtoList.add(String.valueOf(c));
-        }
-        System.out.println("CONTENT attemptStringtoList: \n" + attemptStringtoList);
-        System.out.println("CONTENT marklist: \n" + markL);
-
-        if (attemptString.length() != markL.size()){
-            throw new InvalidFeedbackException();
-        }
-
-        int i = 0;
-        for (Mark m : markL){
-            if (m.equals(Mark.CORRECT)){
-                hintList.put(i, attemptStringtoList.get(i).toUpperCase());
-            }else if (m.equals(Mark.PRESENT)){
-                hintList.put(i, "#");
-            } else {
-                hintList.put(i, ".");
-            }
-            i++;
-        }
-
-        String s = "";
-        System.out.println("HASH VALUES: \n "+hintList.values());
-        for (String a : hintList.values()){
-            if (!a.equals("")){
-                s+=a;
-            }else {
-                s+=".";
-            }
-        }
-        return s;
     }
 
     @Override

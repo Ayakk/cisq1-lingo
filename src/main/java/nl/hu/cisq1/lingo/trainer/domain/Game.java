@@ -2,15 +2,13 @@ package nl.hu.cisq1.lingo.trainer.domain;
 
 
 public class Game {
-    private Feedback f;
     private Round r;
-    private Word w;
+    private Word w; //TODO gebruik word paackage
     private boolean gameStatus;
 
-    public Game() {
+    public Game(Round round) {
         gameStatus = false;
-        f = new Feedback();
-        r = new Round();
+        this.r = round;
         w = new Word("woord");
     }
 
@@ -47,11 +45,12 @@ public class Game {
     }
 
     public void startGame(){
-        gameStatus=true;
+        gameStatus=true; //TODO enum gamestatus playing, waiting,
 //        f.setAttempt(r.getUserInput());
         r.setF(f);
         r.setW(w);
         r.startRound();
-
+        gameStatus= false;
     }
+    //TODO score
 }

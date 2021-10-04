@@ -44,7 +44,7 @@ class FeedbackTest {
 
     @Test
     @DisplayName("given word is not invalid")
-    void guessIsNotInvalid(){
+    void guessIsNotInvalid(){ //todo guessValid --> alles correct
         Feedback f = new Feedback("woord", List.of(Feedback.Mark.PRESENT, Feedback.Mark.PRESENT, Feedback.Mark.PRESENT, Feedback.Mark.PRESENT, Feedback.Mark.PRESENT));
         assertFalse(f.wordIsInvalid(f));
     }

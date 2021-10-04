@@ -18,7 +18,16 @@ class GameTest {
     @DisplayName("Check if game plays round")
     void playGame(){
         Game g = new Game();
-        g.startGame();
+//        g.startGame();
 
+    }
+
+    @Test
+    @DisplayName("Check if all objects are created correctly when a game is made")
+    void testObjects(){
+        Game g = new Game();
+        assertNotNull(g.getF());
+        assertNotNull(g.getR());
+        assertNotNull(g.getW());
     }
 }
