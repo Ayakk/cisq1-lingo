@@ -5,7 +5,7 @@ import nl.hu.cisq1.lingo.words.domain.Word;
 
 public class Game {
     private Round r;
-    private Word w; //TODO gebruik word paackage
+    private Word w;
     private gStatus gameStatus;
 
     public Game(Round round, Word word) {
@@ -17,8 +17,12 @@ public class Game {
     public enum gStatus{
         PLAYING,
         WAITING,
-        STOPPED
+        STOPPED,
+        WON,
+        LOST
     }
+
+
 
     public gStatus getGameStatus() {
         return gameStatus;
