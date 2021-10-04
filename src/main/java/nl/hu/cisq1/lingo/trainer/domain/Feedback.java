@@ -1,11 +1,8 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.words.domain.exception.InvalidFeedbackException;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Feedback {
     private String attempt;
@@ -77,20 +74,26 @@ public class Feedback {
             }
         }
         setMarkList(markL);
-        for (int i = 0; i < markL.size(); i++){
-            if (markL.get(i).equals(Mark.CORRECT)){
+
+        System.out.println("Attempt was: " + attempt);
+        System.out.println("Feedback was: " + markListToString(markL, guessHolder));
+        return markListToString(markL, guessHolder);
+    }
+
+    //convert list of feedback to string with hint
+    public String markListToString(List<Mark> markL, HashMap<Integer, Character> guessHolder){
+        String returnString = "";
+        for (int i = 0; i < markL.size(); i++) {
+            if (markL.get(i).equals(Mark.CORRECT)) {
                 returnString += String.valueOf(guessHolder.get(i)).toUpperCase();
-            } else if (markL.get(i).equals(Mark.PRESENT)){
+            } else if (markL.get(i).equals(Mark.PRESENT)) {
                 returnString += "#";
-            } else if (markL.get(i).equals(Mark.INVALID)){
+            } else if (markL.get(i).equals(Mark.INVALID)) {
                 returnString += "X";
-            }
-            else{
+            } else {
                 returnString += ".";
             }
         }
-        System.out.println("Attempt was: " + attempt);
-        System.out.println("Feedback was: " + returnString);
         return returnString;
     }
 

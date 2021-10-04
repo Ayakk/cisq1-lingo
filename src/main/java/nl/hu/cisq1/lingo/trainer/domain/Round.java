@@ -52,8 +52,8 @@ public class Round {
         while (attempts <= 4 && wordGuessed != true) {
             attempts++;
 //                String guess = getUserInput();
-            String attempt = "woord";
-            f.setAttempt(attempt);
+//            String attempt = "woord";
+//            f.setAttempt(attempt);
             f.setW(w);
             f.giveBetterHint();
             if (f.getAttempt().equals(f.getW().getToGuessWord())) {

@@ -1,5 +1,6 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +30,11 @@ class RoundTest {
     @DisplayName("Check if round plays correctly")
     void checkIfRoundPlaysCorrectly(){
         Round r = new Round();
+        Feedback feedback = new Feedback();
+        feedback.setAttempt("woard");
+        r.setF(feedback);
         r.startRound();
+        assertTrue(r.getRoundStatus());
     }
 
 }
