@@ -31,5 +31,5 @@ public class Game {
         this.w = w;
     }
 
-    
+
 }
