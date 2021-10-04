@@ -81,8 +81,10 @@ public class Feedback {
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
         List<Mark.status> markL = new ArrayList<>();
+
+        String wordToGuess = "woord";
         System.out.println("Attempt: " + getAttempt());
-        System.out.println("ToGuessWord: " + w.getValue());
+        System.out.println("ToGuessWord: " + wordToGuess);
 
         String returnString = "";
 
@@ -92,8 +94,8 @@ public class Feedback {
             guessHolder.put(i, c);
         }
 
-        for (int i = 0; i < w.getValue().length(); i++){
-            char c = w.getValue().charAt(i);
+        for (int i = 0; i < wordToGuess.length(); i++){
+            char c = wordToGuess.charAt(i);
             //Process char
             attemptHolder.put(i, c);
         }

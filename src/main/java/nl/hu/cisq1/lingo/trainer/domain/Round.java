@@ -10,22 +10,21 @@ public class Round {
     private Word w;
     private int attempts = 0;
 
-    public Round(Feedback feedback) {
+    public Round(Feedback feedback, Word word) {
         roundStatus = false;
-        f = new Feedback();
+        this.f = feedback;
+        this.w = word;
     }
 
     public void startRound(String attempt){
         boolean wordGuessed = false;
-        w = new Word("woord");
-        String word = w.getValue();
-        f.setW(w);
-        System.out.println("The word has " + w.getValue().length() + " letters");
+        String wordToGuess = "woord";
+        System.out.println("The word has " + wordToGuess.length() + " letters");
         while (attempts <= 4 && wordGuessed != true) {
             attempts++;
             System.out.println("Round " + attempts);
             f.setAttempt(attempt);
-            if (f.getAttempt().equals(f.getW().getValue())) {
+            if (f.getAttempt().equals(wordToGuess)) {
                 wordGuessed = true;
                 System.out.println("Correct!");
             } else{

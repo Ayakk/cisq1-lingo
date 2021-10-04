@@ -20,11 +20,15 @@ public class Game {
         STOPPED
     }
 
+    public gStatus getGameStatus() {
+        return gameStatus;
+    }
 
-    public void startGame(){
+    public void startGame(String attempt){
         gameStatus=gStatus.PLAYING; //TODO enum gamestatus playing, waiting,
 //        f.setAttempt(r.getUserInput());
-        r.startRound("woord");
+        r.startRound(attempt);
+        gameStatus=gStatus.WAITING;
         gameStatus= gStatus.STOPPED;
     }
     //TODO score
