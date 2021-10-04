@@ -34,6 +34,53 @@ public class Feedback {
         return attempt;
     }
 
+    public Word getW() {
+        return w;
+    }
+
+    public void setW(Word w) {
+        this.w = w;
+    }
+
+    public void setAttempt(String attempt) {
+        this.attempt = attempt;
+    }
+
+    public List<Mark> getMarkList() {
+        return markList;
+    }
+
+    public void setMarkList(List<Mark> markList) {
+        this.markList = markList;
+    }
+
+    public boolean isWordGuessed(Feedback feedback){
+        try{
+            //is Guessed starts on true
+            boolean isGuessed = true;
+            //for loop checks if ifGuessed should be put to false
+            for(Mark m : feedback.getMarkList()){
+                //checks if all marks are correct, if not isGuessed = false
+                if (!m.equals(Mark.CORRECT)){
+                    isGuessed = false;
+                }
+            }
+            return isGuessed;
+        }catch (InvalidFeedbackException exception){
+            throw new RuntimeException(exception.getMessage());
+        }
+    }
+
+    public boolean wordIsInvalid(Feedback feedback){
+        boolean isInvalid = false;
+        String word = feedback.getAttempt();
+        //if the word length is outside what is allowed isInvalid will become true
+        if (word.length() < 4 || word.length() > 6){
+            isInvalid = true;
+        }
+        return isInvalid;
+    }
+
     public String giveBetterHint(){
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
@@ -95,53 +142,6 @@ public class Feedback {
             }
         }
         return returnString;
-    }
-
-    public Word getW() {
-        return w;
-    }
-
-    public void setW(Word w) {
-        this.w = w;
-    }
-
-    public void setAttempt(String attempt) {
-        this.attempt = attempt;
-    }
-
-    public List<Mark> getMarkList() {
-        return markList;
-    }
-
-    public void setMarkList(List<Mark> markList) {
-        this.markList = markList;
-    }
-
-    public boolean isWordGuessed(Feedback feedback){
-        try{
-            //is Guessed starts on true
-            boolean isGuessed = true;
-            //for loop checks if ifGuessed should be put to false
-            for(Mark m : feedback.getMarkList()){
-                //checks if all marks are correct, if not isGuessed = false
-                if (!m.equals(Mark.CORRECT)){
-                    isGuessed = false;
-                }
-            }
-            return isGuessed;
-        }catch (InvalidFeedbackException exception){
-            throw new RuntimeException(exception.getMessage());
-        }
-    }
-
-    public boolean wordIsInvalid(Feedback feedback){
-        boolean isInvalid = false;
-        String word = feedback.getAttempt();
-        //if the word length is outside what is allowed isInvalid will become true
-        if (word.length() < 4 || word.length() > 6){
-            isInvalid = true;
-        }
-        return isInvalid;
     }
 
 
