@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import com.sun.xml.bind.v2.TODO;
+import net.bytebuddy.pool.TypePool;
 import nl.hu.cisq1.lingo.words.domain.exception.InvalidFeedbackException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import javax.validation.constraints.AssertTrue;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -65,6 +68,31 @@ class FeedbackTest {
         Feedback f = new Feedback("wodro");
         assertEquals("WO#R#", f.giveBetterHint());
     }
+
+    @Test
+    @DisplayName("testing if marklist is converted to string correctly")
+    void markListToStringTest(){
+        Feedback f = new Feedback();
+        List<Feedback.Mark> markL = new ArrayList<Feedback.Mark>();
+        HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
+
+        markL.add(Feedback.Mark.CORRECT);
+        markL.add(Feedback.Mark.ABSENT);
+        markL.add(Feedback.Mark.ABSENT);
+        markL.add(Feedback.Mark.CORRECT);
+        markL.add(Feedback.Mark.ABSENT);
+
+        guessHolder.put(0, 'w');
+        guessHolder.put(1, 'a');
+        guessHolder.put(2, 'a');
+        guessHolder.put(3, 'r');
+        guessHolder.put(4, 'a');
+
+
+        assertEquals("W..R.", f.markListToString(markL, guessHolder));
+    }
+
+
 
     @ParameterizedTest
     @MethodSource("provideHintExamples")
