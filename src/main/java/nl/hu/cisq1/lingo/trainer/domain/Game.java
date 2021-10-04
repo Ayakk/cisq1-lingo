@@ -6,6 +6,19 @@ public class Game {
     private Feedback f;
     private Round r;
     private Word w;
+    private boolean gameStatus;
+
+    public Game() {
+        gameStatus = false;
+    }
+
+    public boolean getStatus() {
+        return gameStatus;
+    }
+
+    public void setStatus(boolean gameStatus) {
+        this.gameStatus = gameStatus;
+    }
 
     public Feedback getF() {
         return f;
@@ -31,5 +44,7 @@ public class Game {
         this.w = w;
     }
 
-
+    public void startGame(){
+        gameStatus=true;
+    }
 }

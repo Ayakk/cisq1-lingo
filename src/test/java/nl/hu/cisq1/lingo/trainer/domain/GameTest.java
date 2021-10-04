@@ -11,6 +11,6 @@ class GameTest {
     void startGame(){
         Game g = new Game();
         g.startGame();
-        assertTrue(g.getStatus);
+        assertTrue(g.getStatus());
     }
 }
