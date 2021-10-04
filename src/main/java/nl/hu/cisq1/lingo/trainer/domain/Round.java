@@ -1,5 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.words.domain.Word;
+
 import java.util.Scanner;
 
 public class Round {
@@ -13,54 +15,21 @@ public class Round {
         f = new Feedback();
     }
 
-//    public Feedback getF() {
-//        return f;
-//    }
-//
-//    public boolean getRoundStatus() {
-//        return roundStatus;
-//    }
-//
-//    public void setRoundStatus(boolean roundStatus) {
-//        this.roundStatus = roundStatus;
-//    }
-//
-//    public void setF(Feedback f) {
-//        this.f = f;
-//    }
-//
-//    public Word getW() {
-//        return w;
-//    }
-//
-//    public void setW(Word w) {
-//        this.w = w;
-//    }
-
-
-
-
-//    public String useUserInput(){
-//        getUserInput();
-//
-//    }
-
     public void startRound(String attempt){
         boolean wordGuessed = false;
         w = new Word("woord");
-        String word = w.getToGuessWord();
+        String word = w.getValue();
         f.setW(w);
-        System.out.println("The word has " + w.getToGuessWord().length() + " letters");
+        System.out.println("The word has " + w.getValue().length() + " letters");
         while (attempts <= 4 && wordGuessed != true) {
             attempts++;
             System.out.println("Round " + attempts);
-            String guess = getUserInput();
-            f.setAttempt(guess);
-            if (f.getAttempt().equals(f.getW().getToGuessWord())) {
+            f.setAttempt(attempt);
+            if (f.getAttempt().equals(f.getW().getValue())) {
                 wordGuessed = true;
                 System.out.println("Correct!");
             } else{
-                f.setAttempt(guess);
+                f.setAttempt(attempt);
                 f.giveBetterHint();
             }
         }

@@ -1,12 +1,13 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.words.domain.Word;
 import nl.hu.cisq1.lingo.words.domain.exception.InvalidFeedbackException;
 
 import java.util.*;
 
 public class Feedback {
     private String attempt;
-    private List<Mark> markList;
+    private List<Mark.status> markList;
     private HashMap<Integer, String> hintList = new HashMap<Integer, String>();
     private Word w;
 
@@ -16,19 +17,14 @@ public class Feedback {
 
     public Feedback(String attempt) {
         this.attempt = attempt;
-        w = new Word("woord");
+        w = new Word();
     }
 
-    public Feedback(String attempt, List<Mark> markList) {
+    public Feedback(String attempt, List<Mark.status> markList) {
         this.attempt = attempt;
         this.markList = markList;
     }
-    public enum Mark{ //todo eigen bestand
-        INVALID,
-        CORRECT,
-        ABSENT,
-        PRESENT
-    }
+
 
     public String getAttempt() {
         return attempt;
@@ -46,11 +42,11 @@ public class Feedback {
         this.attempt = attempt;
     }
 
-    public List<Mark> getMarkList() {
+    public List<Mark.status> getMarkList() {
         return markList;
     }
 
-    public void setMarkList(List<Mark> markList) {
+    public void setMarkList(List<Mark.status> markList) {
         this.markList = markList;
     }
 
@@ -59,9 +55,9 @@ public class Feedback {
             //is Guessed starts on true
             boolean isGuessed = true;
             //for loop checks if ifGuessed should be put to false
-            for(Mark m : feedback.getMarkList()){
+            for(Mark.status m : feedback.getMarkList()){
                 //checks if all marks are correct, if not isGuessed = false
-                if (!m.equals(Mark.CORRECT)){
+                if (!m.equals(Mark.status.CORRECT)){
                     isGuessed = false;
                 }
             }
@@ -84,9 +80,9 @@ public class Feedback {
     public String giveBetterHint(){
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
-        List<Mark> markL = new ArrayList<Mark>();
+        List<Mark.status> markL = new ArrayList<>();
         System.out.println("Attempt: " + getAttempt());
-        System.out.println("ToGuessWord: " + w.getToGuessWord());
+        System.out.println("ToGuessWord: " + w.getValue());
 
         String returnString = "";
 
@@ -96,27 +92,27 @@ public class Feedback {
             guessHolder.put(i, c);
         }
 
-        for (int i = 0; i < w.getToGuessWord().length(); i++){
-            char c = w.getToGuessWord().charAt(i);
+        for (int i = 0; i < w.getValue().length(); i++){
+            char c = w.getValue().charAt(i);
             //Process char
             attemptHolder.put(i, c);
         }
 
         if (guessHolder.equals(attemptHolder)){
             for (int i = 0; i < guessHolder.size(); i++){
-                markL.add(Mark.CORRECT);
+                markL.add(Mark.status.CORRECT);
             }
         } else if (guessHolder.size() != attemptHolder.size()){
             for (int i = 0; i < guessHolder.size(); i++)
-                markL.add(Mark.INVALID);
+                markL.add(Mark.status.INVALID);
         }else {
             for (int i = 0; i < guessHolder.size(); i++){
                 if (attemptHolder.get(i).equals(guessHolder.get(i))){
-                    markL.add(Mark.CORRECT);
+                    markL.add(Mark.status.CORRECT);
                 } else if (attemptHolder.containsValue(guessHolder.get(i))){
-                    markL.add(Mark.PRESENT);
+                    markL.add(Mark.status.PRESENT);
                 } else{
-                    markL.add(Mark.ABSENT);
+                    markL.add(Mark.status.ABSENT);
                 }
             }
         }
@@ -128,14 +124,14 @@ public class Feedback {
     }
 
     //convert list of feedback to string with hint
-    public String markListToString(List<Mark> markL, HashMap<Integer, Character> guessHolder){
+    public String markListToString(List<Mark.status> markL, HashMap<Integer, Character> guessHolder){
         String returnString = "";
         for (int i = 0; i < markL.size(); i++) {
-            if (markL.get(i).equals(Mark.CORRECT)) {
+            if (markL.get(i).equals(Mark.status.CORRECT)) {
                 returnString += String.valueOf(guessHolder.get(i)).toUpperCase();
-            } else if (markL.get(i).equals(Mark.PRESENT)) {
+            } else if (markL.get(i).equals(Mark.status.PRESENT)) {
                 returnString += "#";
-            } else if (markL.get(i).equals(Mark.INVALID)) {
+            } else if (markL.get(i).equals(Mark.status.INVALID)) {
                 returnString += "X";
             } else {
                 returnString += ".";
