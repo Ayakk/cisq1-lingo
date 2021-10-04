@@ -43,25 +43,31 @@ public class Round {
         return userInput;
     }
 
+//    public String useUserInput(){
+//        getUserInput();
+//
+//    }
+
     public void startRound(){
         boolean wordGuessed = false;
         w = new Word("woord");
         String word = w.getToGuessWord();
-
-
+        f.setW(w);
+        System.out.println("The word has " + w.getToGuessWord().length() + " letters");
         while (attempts <= 4 && wordGuessed != true) {
             attempts++;
-//                String guess = getUserInput();
-//            String attempt = "woord";
-//            f.setAttempt(attempt);
-            f.setW(w);
-            f.giveBetterHint();
+            System.out.println("Round " + attempts);
+            String guess = getUserInput();
+            f.setAttempt(guess);
             if (f.getAttempt().equals(f.getW().getToGuessWord())) {
                 wordGuessed = true;
                 System.out.println("Correct!");
+            } else{
+                f.setAttempt(guess);
+                f.giveBetterHint();
             }
         }
-
+        System.out.println("Game has ended!");
         roundStatus = true;
     }
 }

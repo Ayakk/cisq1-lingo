@@ -13,4 +13,11 @@ class GameTest {
         g.startGame();
         assertTrue(g.getStatus());
     }
+
+    @Test
+    @DisplayName("Check if game plays round")
+    void playGame(){
+        Game g = new Game();
+        g.startGame();
+    }
 }

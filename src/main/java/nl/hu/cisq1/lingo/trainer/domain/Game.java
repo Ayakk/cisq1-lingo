@@ -1,6 +1,5 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import nl.hu.cisq1.lingo.words.domain.Word;
 
 public class Game {
     private Feedback f;
@@ -10,6 +9,9 @@ public class Game {
 
     public Game() {
         gameStatus = false;
+        f = new Feedback();
+        r = new Round();
+        w = new Word("woord");
     }
 
     public boolean getStatus() {
@@ -46,5 +48,10 @@ public class Game {
 
     public void startGame(){
         gameStatus=true;
+//        f.setAttempt(r.getUserInput());
+        r.setF(f);
+        r.setW(w);
+        r.startRound();
+
     }
 }
