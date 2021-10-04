@@ -6,20 +6,26 @@ import nl.hu.cisq1.lingo.words.domain.Word;
 public class Game {
     private Round r;
     private Word w; //TODO gebruik word paackage
-    private boolean gameStatus;
+    private gStatus gameStatus;
 
     public Game(Round round, Word word) {
-        gameStatus = false;
+        gameStatus = gStatus.STOPPED;
         this.r = round;
         this.w = word;
     }
 
+    public enum gStatus{
+        PLAYING,
+        WAITING,
+        STOPPED
+    }
+
 
     public void startGame(){
-        gameStatus=true; //TODO enum gamestatus playing, waiting,
+        gameStatus=gStatus.PLAYING; //TODO enum gamestatus playing, waiting,
 //        f.setAttempt(r.getUserInput());
-        r.startRound("test");
-        gameStatus= false;
+        r.startRound("woord");
+        gameStatus= gStatus.STOPPED;
     }
     //TODO score
 }

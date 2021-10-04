@@ -9,8 +9,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LingoApplication {
     public static void main(String[] args) {
         SpringApplication.run(LingoApplication.class, args);
-
-        Game g = new Game();
-        g.startGame();
     }
 }
