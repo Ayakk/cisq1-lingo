@@ -92,14 +92,27 @@ class FeedbackTest {
 
 
 
-    @ParameterizedTest
-    @MethodSource("provideHintExamples")
+
     static Stream<Arguments> provideHintExamples() {
         return Stream.of(
-                Arguments.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT),
-                Arguments.of(Mark.CORRECT, Mark.PRESENT, Mark.ABSENT),
-                Arguments.of(Mark.INVALID, Mark.INVALID, Mark.INVALID),
-                Arguments.of(Mark.INVALID, Mark.INVALID, Mark.INVALID),
-                Arguments.of(Mark.ABSENT, Mark.ABSENT, Mark.ABSENT));
+                Arguments.of(new Feedback("banaan", "banana"), "BANA##"),
+                Arguments.of(new Feedback("ksuir", "kruis"), "K#UI#"),
+                Arguments.of(new Feedback("kaasje", "kastje"), "KA##JE"),
+                Arguments.of(new Feedback("aaabbb", "bbbaaa"), "######"),
+                Arguments.of(new Feedback("aaabab", "bbbaaa"), "####A#"),
+                Arguments.of(new Feedback("aaaaaa", "bbbbbb"), "......"),
+                Arguments.of(new Feedback("gehoor", "onmens"), ".#.##."),
+                Arguments.of(new Feedback("aabbcc", "abcabc"), "A####C"),
+                Arguments.of(new Feedback("alianna", "liniaal"), "#######"),
+                Arguments.of(new Feedback("heren", "haren"), "H#REN"),
+                Arguments.of(new Feedback("eeaaae", "aaeeae"), "####AE")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideHintExamples")
+    @DisplayName("test")
+    void test(Feedback feedback, String expectedHint){
+        assertEquals(feedback.giveBetterHint(), expectedHint);
     }
 }

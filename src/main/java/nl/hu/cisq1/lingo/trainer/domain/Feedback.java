@@ -122,18 +122,18 @@ public class Feedback {
 
     //convert list of feedback to string with hint
     public String markListToString(List<Mark> markL, HashMap<Integer, Character> guessHolder) {
-        String returnString = "";
+        StringBuilder returnString = new StringBuilder();
         for (int i = 0; i < markL.size(); i++) {
             if (markL.get(i).equals(Mark.CORRECT)) {
-                returnString += String.valueOf(guessHolder.get(i)).toUpperCase();
+                returnString.append(String.valueOf(guessHolder.get(i)).toUpperCase());
             } else if (markL.get(i).equals(Mark.PRESENT)) {
-                returnString += "#";
+                returnString.append("#");
             } else if (markL.get(i).equals(Mark.INVALID)) {
-                returnString += "X";
+                returnString.append("X");
             } else {
-                returnString += ".";
+                returnString.append(".");
             }
         }
-        return returnString;
+        return returnString.toString();
     }
 }
