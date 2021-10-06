@@ -1,15 +1,11 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import com.sun.xml.bind.v2.TODO;
-import net.bytebuddy.pool.TypePool;
-import nl.hu.cisq1.lingo.words.domain.exception.InvalidFeedbackException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import javax.validation.constraints.AssertTrue;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
