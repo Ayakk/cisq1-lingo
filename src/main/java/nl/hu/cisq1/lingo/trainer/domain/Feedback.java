@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Feedback {
     private String attempt;
-    private List<Mark.status> markList;
+    private List<Mark> markList;
     private HashMap<Integer, String> hintList = new HashMap<Integer, String>();
     private Word w;
 
@@ -20,7 +20,7 @@ public class Feedback {
         w = new Word();
     }
 
-    public Feedback(String attempt, List<Mark.status> markList) {
+    public Feedback(String attempt, List<Mark> markList) {
         this.attempt = attempt;
         this.markList = markList;
     }
@@ -42,11 +42,11 @@ public class Feedback {
         this.attempt = attempt;
     }
 
-    public List<Mark.status> getMarkList() {
+    public List<Mark> getMarkList() {
         return markList;
     }
 
-    public void setMarkList(List<Mark.status> markList) {
+    public void setMarkList(List<Mark> markList) {
         this.markList = markList;
     }
 
@@ -55,9 +55,9 @@ public class Feedback {
             //is Guessed starts on true
             boolean isGuessed = true;
             //for loop checks if ifGuessed should be put to false
-            for(Mark.status m : feedback.getMarkList()){
+            for(Mark m : feedback.getMarkList()){
                 //checks if all marks are correct, if not isGuessed = false
-                if (!m.equals(Mark.status.CORRECT)){
+                if (!m.equals(Mark.CORRECT)){
                     isGuessed = false;
                 }
             }
@@ -80,7 +80,7 @@ public class Feedback {
     public String giveBetterHint(){
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
-        List<Mark.status> markL = new ArrayList<>();
+        List<Mark> markL = new ArrayList<>();
 
         String wordToGuess = "woord";
         System.out.println("Attempt: " + getAttempt());
@@ -102,19 +102,19 @@ public class Feedback {
 
         if (guessHolder.equals(attemptHolder)){
             for (int i = 0; i < guessHolder.size(); i++){
-                markL.add(Mark.status.CORRECT);
+                markL.add(Mark.CORRECT);
             }
         } else if (guessHolder.size() != attemptHolder.size()){
             for (int i = 0; i < guessHolder.size(); i++)
-                markL.add(Mark.status.INVALID);
+                markL.add(Mark.INVALID);
         }else {
             for (int i = 0; i < guessHolder.size(); i++){
                 if (attemptHolder.get(i).equals(guessHolder.get(i))){
-                    markL.add(Mark.status.CORRECT);
+                    markL.add(Mark.CORRECT);
                 } else if (attemptHolder.containsValue(guessHolder.get(i))){
-                    markL.add(Mark.status.PRESENT);
+                    markL.add(Mark.PRESENT);
                 } else{
-                    markL.add(Mark.status.ABSENT);
+                    markL.add(Mark.ABSENT);
                 }
             }
         }
@@ -126,14 +126,14 @@ public class Feedback {
     }
 
     //convert list of feedback to string with hint
-    public String markListToString(List<Mark.status> markL, HashMap<Integer, Character> guessHolder){
+    public String markListToString(List<Mark> markL, HashMap<Integer, Character> guessHolder){
         String returnString = "";
         for (int i = 0; i < markL.size(); i++) {
-            if (markL.get(i).equals(Mark.status.CORRECT)) {
+            if (markL.get(i).equals(Mark.CORRECT)) {
                 returnString += String.valueOf(guessHolder.get(i)).toUpperCase();
-            } else if (markL.get(i).equals(Mark.status.PRESENT)) {
+            } else if (markL.get(i).equals(Mark.PRESENT)) {
                 returnString += "#";
-            } else if (markL.get(i).equals(Mark.status.INVALID)) {
+            } else if (markL.get(i).equals(Mark.INVALID)) {
                 returnString += "X";
             } else {
                 returnString += ".";

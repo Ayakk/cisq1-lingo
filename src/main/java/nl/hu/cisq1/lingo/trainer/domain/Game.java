@@ -6,23 +6,13 @@ import nl.hu.cisq1.lingo.words.domain.Word;
 public class Game {
     private Round r;
     private Word w;
-    private gStatus gameStatus;
+    private GameStatus gameStatus;
 
     public Game(Round round, Word word) {
-        gameStatus = gStatus.STOPPED;
+        gameStatus = GameStatus.STOPPED;
         this.r = round;
         this.w = word;
     }
-
-    public enum gStatus{
-        PLAYING,
-        WAITING,
-        STOPPED,
-        WON,
-        LOST
-    }
-
-
 
     public gStatus getGameStatus() {
         return gameStatus;
