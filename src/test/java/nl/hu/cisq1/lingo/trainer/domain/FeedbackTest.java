@@ -21,14 +21,14 @@ class FeedbackTest {
     @Test
     @DisplayName("Word is guessed if all letters are correct")
     void wordIsGuessed(){
-        Feedback f = new Feedback("woord", List.of(Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT));
+        Feedback f = new Feedback("woord", List.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
         assertTrue(f.isWordGuessed(f));
     }
 
     @Test
     @DisplayName("Word is not guessed if some or all letters are incorrect")
     void wordIsNotGuessed(){
-        Feedback f = new Feedback("woord", List.of(Mark.status.INVALID, Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT));
+        Feedback f = new Feedback("woord", List.of(Mark.INVALID, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
         assertFalse(f.isWordGuessed(f));
     }
 
@@ -36,14 +36,14 @@ class FeedbackTest {
     @Test
     @DisplayName("given word is invalid")
     void guessIsInvalid(){
-        Feedback f = new Feedback("hek", List.of(Mark.status.INVALID, Mark.status.INVALID, Mark.status.INVALID, Mark.status.INVALID, Mark.status.INVALID));
+        Feedback f = new Feedback("hek", List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
         assertTrue(f.wordIsInvalid(f));
     }
 
     @Test
     @DisplayName("given word is not invalid")
     void guessValid(){
-        Feedback f = new Feedback("woord", List.of(Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT));
+        Feedback f = new Feedback("woord", List.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
         assertFalse(f.wordIsInvalid(f));
     }
 
@@ -56,7 +56,7 @@ class FeedbackTest {
     @Test
     @DisplayName("Give hint")
     void giveHintTest(){
-        Feedback f = new Feedback("waara", List.of(Mark.status.CORRECT, Mark.status.ABSENT, Mark.status.ABSENT, Mark.status.CORRECT, Mark.status.ABSENT));
+        Feedback f = new Feedback("waara", List.of(Mark.CORRECT, Mark.ABSENT, Mark.ABSENT, Mark.CORRECT, Mark.ABSENT));
         assertEquals("W..R.", f.giveBetterHint());
     }
 
@@ -71,14 +71,14 @@ class FeedbackTest {
     @DisplayName("testing if marklist is converted to string correctly")
     void markListToStringTest(){
         Feedback f = new Feedback();
-        List<Mark.status> markL = new ArrayList<>();
+        List<Mark> markL = new ArrayList<>();
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
 
-        markL.add(Mark.status.CORRECT);
-        markL.add(Mark.status.ABSENT);
-        markL.add(Mark.status.ABSENT);
-        markL.add(Mark.status.CORRECT);
-        markL.add(Mark.status.ABSENT);
+        markL.add(Mark.CORRECT);
+        markL.add(Mark.ABSENT);
+        markL.add(Mark.ABSENT);
+        markL.add(Mark.CORRECT);
+        markL.add(Mark.ABSENT);
 
         guessHolder.put(0, 'w');
         guessHolder.put(1, 'a');
@@ -96,10 +96,10 @@ class FeedbackTest {
     @MethodSource("provideHintExamples")
     static Stream<Arguments> provideHintExamples() {
         return Stream.of(
-                Arguments.of(Mark.status.CORRECT, Mark.status.CORRECT, Mark.status.CORRECT),
-                Arguments.of(Mark.status.CORRECT, Mark.status.PRESENT, Mark.status.ABSENT),
-                Arguments.of(Mark.status.INVALID, Mark.status.INVALID, Mark.status.INVALID),
-                Arguments.of(Mark.status.INVALID, Mark.status.INVALID, Mark.status.INVALID),
-                Arguments.of(Mark.status.ABSENT, Mark.status.ABSENT, Mark.status.ABSENT));
+                Arguments.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT),
+                Arguments.of(Mark.CORRECT, Mark.PRESENT, Mark.ABSENT),
+                Arguments.of(Mark.INVALID, Mark.INVALID, Mark.INVALID),
+                Arguments.of(Mark.INVALID, Mark.INVALID, Mark.INVALID),
+                Arguments.of(Mark.ABSENT, Mark.ABSENT, Mark.ABSENT));
     }
 }

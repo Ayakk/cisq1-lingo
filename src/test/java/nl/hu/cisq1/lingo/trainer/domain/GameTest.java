@@ -19,6 +19,6 @@ class GameTest {
 
         Game g = new Game(r, w);
         g.startGame("woard");
-        assertEquals(g.getGameStatus(), Game.gStatus.STOPPED);
+        assertEquals(g.getGameStatus(), GameStatus.STOPPED);
     }
 }
