@@ -18,7 +18,21 @@ class GameTest {
         Round r = new Round(f, w);
 
         Game g = new Game(r, w);
-        g.startGame("woard");
+        g.startGame("woord");
         assertEquals(g.getGameStatus(), GameStatus.STOPPED);
     }
+
+    @Test
+    @DisplayName("checking if score is calculated correctly")
+    void checkGameScore(){
+        Feedback f = new Feedback();
+        Word w = new Word();
+        Round r = new Round(f, w);
+
+        Game g = new Game(r, w);
+        g.startGame("waord");
+        g.startGame("woord");
+        assertEquals(g.getScore(), 30);
+    }
 }
+
