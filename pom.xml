@@ -17,6 +17,11 @@
     <properties>
         <java.version>15.0.2</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.organization>ayakk</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.projectKey>544382582698f8f328815a7becc95e3e1b0c8a44</sonar.projectKey>
+        <sonar.exclusions>**/LingoApplication.java</sonar.exclusions>
+
     </properties>
 
     <dependencies>
@@ -63,6 +68,21 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.6.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>0.12</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <mutationThreshold>90</mutationThreshold>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
