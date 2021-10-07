@@ -11,10 +11,6 @@ public class Round {
         this.f=feedback;
     }
 
-    public GameStatus getGameStatus() {
-        return gameStatus;
-    }
-
     public int startRound(String attempt){
         attempts = 0;
         gameStatus=GameStatus.PLAYING;
