@@ -5,7 +5,7 @@ import nl.hu.cisq1.lingo.words.domain.Word;
 import java.util.Scanner;
 
 public class Round {
-    private boolean roundStatus;
+    private GameStatus gameStatus;
     private Feedback f;
     private Word w;
     private int attempts = 0;
@@ -13,21 +13,21 @@ public class Round {
 
 
     public Round(Feedback feedback, Word word) {
-        roundStatus = false;
         this.f = feedback;
         this.w = word;
     }
 
     public int startRound(String attempt){
         attempts = 0;
-        boolean wordGuessed = false;
+        gameStatus=GameStatus.PLAYING;
         String wordToGuess = "woord";
         System.out.println("The word has " + wordToGuess.length() + " letters");
-        while (attempts <= 4 && wordGuessed != true) {
+        while (attempts <= 4 && gameStatus!=GameStatus.STOPPED) {
             System.out.println("Round " + attempts);
             f.setAttempt(attempt);
+            gameStatus=GameStatus.WAITING;
             if (f.getAttempt().equals(wordToGuess)) {
-                wordGuessed = true;
+                gameStatus=GameStatus.STOPPED;
                 System.out.println("Correct!");
                 return 5 * (5-attempts) +5;
             } else{
@@ -37,7 +37,7 @@ public class Round {
             }
         }
         System.out.println("Game has ended!");
-        roundStatus = true;
+        gameStatus=GameStatus.STOPPED;
         return 0;
     }
 }
