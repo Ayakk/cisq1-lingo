@@ -32,15 +32,15 @@ class FeedbackTest {
     @Test
     @DisplayName("given word is invalid")
     void guessIsInvalid() {
-        Feedback f = new Feedback("hek", List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
-        assertTrue(f.wordIsInvalid(f));
+        Feedback f = new Feedback();
+        assertTrue(f.wordIsInvalid("hek"));
     }
 
     @Test
     @DisplayName("given word is not invalid")
     void guessValid() {
-        Feedback f = new Feedback("woord", List.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
-        assertFalse(f.wordIsInvalid(f));
+        Feedback f = new Feedback();
+        assertFalse(f.wordIsInvalid("woord"));
     }
 
     @Test
@@ -60,8 +60,9 @@ class FeedbackTest {
     @Test
     @DisplayName("Gives valid word but invalid list")
     void giveBadHintTest() {
-        Feedback f = new Feedback("waara", List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
-        assertFalse(f.wordIsInvalid(f));
+        Feedback f = new Feedback();
+        f.setMarkList(List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
+        assertFalse(f.wordIsInvalid("waara"));
     }
 
     @Test
@@ -87,6 +88,17 @@ class FeedbackTest {
         assertEquals("W..R.", f.markListToString(markL, guessHolder));
     }
 
+    @Test
+    @DisplayName("testing if default to guess word 'woord' gets assigned when no word is given")
+    void checkIfDefaultWordGetsAssigned() {
+        Feedback f = new Feedback();
+        f.setAttempt("testw");
+        f.giveBetterHint();
+        assertEquals("woord", f.getWordToGuess());
+    }
+
+
+
     static Stream<Arguments> provideHintExamples() {
         return Stream.of(
                 Arguments.of(new Feedback("banaan", "banana"), "BANA##"),
@@ -97,7 +109,7 @@ class FeedbackTest {
                 Arguments.of(new Feedback("aaaaaa", "bbbbbb"), "......"),
                 Arguments.of(new Feedback("gehoor", "onmens"), ".#.##."),
                 Arguments.of(new Feedback("aabbcc", "abcabc"), "A####C"),
-                Arguments.of(new Feedback("alianna", "liniaal"), "#######"),
+                Arguments.of(new Feedback("alianna", "liniaal"), "X"),
                 Arguments.of(new Feedback("heren", "haren"), "H#REN"),
                 Arguments.of(new Feedback("eeaaae", "aaeeae"), "####AE"),
                 Arguments.of(new Feedback("a", "aaaaa"), "X")

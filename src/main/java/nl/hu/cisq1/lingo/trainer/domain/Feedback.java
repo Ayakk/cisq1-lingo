@@ -8,7 +8,6 @@ public class Feedback {
     private String attempt;
     private List<Mark> markList;
     private HashMap<Integer, String> hintList = new HashMap<Integer, String>();
-    private Word w;
     private String wordToGuess;
 
     public Feedback() {
@@ -46,6 +45,10 @@ public class Feedback {
         this.markList = markList;
     }
 
+    public String getWordToGuess() {
+        return wordToGuess;
+    }
+
     public boolean isWordGuessed(Feedback feedback) {
         //is Guessed starts on true
         boolean isGuessed = true;
@@ -54,20 +57,16 @@ public class Feedback {
             //checks if all marks are correct, if not isGuessed = false
             if (!m.equals(Mark.CORRECT)) {
                 isGuessed = false;
+                break;
             }
         }
         return isGuessed;
     }
 
 
-    public boolean wordIsInvalid(Feedback feedback) {
-        boolean isInvalid = false;
-        String word = feedback.getAttempt();
+    public boolean wordIsInvalid(String word) {
         //if the word length is outside what is allowed isInvalid will become true
-        if (word.length() < 4 || word.length() > 6) {
-            isInvalid = true;
-        }
-        return isInvalid;
+        return word.length() < 4 || word.length() > 6;
     }
 
     public String giveBetterHint() {
@@ -78,45 +77,43 @@ public class Feedback {
         if (wordToGuess == null){
             wordToGuess="woord";
         }
-        System.out.println("Attempt: " + getAttempt());
-        System.out.println("ToGuessWord: " + wordToGuess);
 
-        String returnString = "";
 
-        for (int i = 0; i < getAttempt().length(); i++) {
-            char c = getAttempt().charAt(i);
-            //Process char
-            guessHolder.put(i, c);
-        }
-
-        for (int i = 0; i < wordToGuess.length(); i++) {
-            char c = wordToGuess.charAt(i);
-            //Process char
-            attemptHolder.put(i, c);
-        }
-
-        if (guessHolder.equals(attemptHolder)) {
-            for (int i = 0; i < guessHolder.size(); i++) {
-                markL.add(Mark.CORRECT);
+        if (!wordIsInvalid(attempt)){
+            for (int i = 0; i < getAttempt().length(); i++) {
+                char c = getAttempt().charAt(i);
+                //Process char
+                guessHolder.put(i, c);
             }
-        } else if (guessHolder.size() != attemptHolder.size()) {
-            for (int i = 0; i < guessHolder.size(); i++)
-                markL.add(Mark.INVALID);
-        } else {
-            for (int i = 0; i < guessHolder.size(); i++) {
-                if (attemptHolder.get(i).equals(guessHolder.get(i))) {
+
+            for (int i = 0; i < wordToGuess.length(); i++) {
+                char c = wordToGuess.charAt(i);
+                //Process char
+                attemptHolder.put(i, c);
+            }
+
+            if (guessHolder.equals(attemptHolder)) {
+                for (int i = 0; i < guessHolder.size(); i++) {
                     markL.add(Mark.CORRECT);
-                } else if (attemptHolder.containsValue(guessHolder.get(i))) {
-                    markL.add(Mark.PRESENT);
-                } else {
-                    markL.add(Mark.ABSENT);
+                }
+            } else if (guessHolder.size() != attemptHolder.size()) {
+                for (int i = 0; i < guessHolder.size(); i++)
+                    markL.add(Mark.INVALID);
+            } else {
+                for (int i = 0; i < guessHolder.size(); i++) {
+                    if (attemptHolder.get(i).equals(guessHolder.get(i))) {
+                        markL.add(Mark.CORRECT);
+                    } else if (attemptHolder.containsValue(guessHolder.get(i))) {
+                        markL.add(Mark.PRESENT);
+                    } else {
+                        markL.add(Mark.ABSENT);
+                    }
                 }
             }
+        } else{
+            markL.add(Mark.INVALID);
         }
         setMarkList(markL);
-
-        System.out.println("Attempt was: " + attempt);
-        System.out.println("Feedback was: " + markListToString(markL, guessHolder));
         return markListToString(markL, guessHolder);
     }
 
