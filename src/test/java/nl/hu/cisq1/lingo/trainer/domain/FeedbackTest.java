@@ -16,14 +16,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class FeedbackTest {
     @Test
     @DisplayName("Word is guessed if all letters are correct")
-    void wordIsGuessed(){
+    void wordIsGuessed() {
         Feedback f = new Feedback("woord", List.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
         assertTrue(f.isWordGuessed(f));
     }
 
     @Test
     @DisplayName("Word is not guessed if some or all letters are incorrect")
-    void wordIsNotGuessed(){
+    void wordIsNotGuessed() {
         Feedback f = new Feedback("woord", List.of(Mark.INVALID, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
         assertFalse(f.isWordGuessed(f));
     }
@@ -31,41 +31,42 @@ class FeedbackTest {
 
     @Test
     @DisplayName("given word is invalid")
-    void guessIsInvalid(){
+    void guessIsInvalid() {
         Feedback f = new Feedback("hek", List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
         assertTrue(f.wordIsInvalid(f));
     }
 
     @Test
     @DisplayName("given word is not invalid")
-    void guessValid(){
+    void guessValid() {
         Feedback f = new Feedback("woord", List.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
         assertFalse(f.wordIsInvalid(f));
     }
 
-//    @Test
-//    @DisplayName("Test Invalid Feedback length")
-//    void InvalidFeedbackExceptionCheck(){
-//        assertThrows(InvalidFeedbackException.class, () -> new Feedback("woord", List.of(Mark.status.CORRECT)));
-//    }
-
     @Test
     @DisplayName("Give hint")
-    void giveHintTest(){
+    void giveHintTest() {
         Feedback f = new Feedback("waara", List.of(Mark.CORRECT, Mark.ABSENT, Mark.ABSENT, Mark.CORRECT, Mark.ABSENT));
         assertEquals("W..R.", f.giveBetterHint());
     }
 
     @Test
     @DisplayName("Give hint")
-    void giveBetterHintTest(){
+    void giveBetterHintTest() {
         Feedback f = new Feedback("wodro");
         assertEquals("WO#R#", f.giveBetterHint());
     }
 
     @Test
+    @DisplayName("Gives valid word but invalid list")
+    void giveBadHintTest() {
+        Feedback f = new Feedback("waara", List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
+        assertFalse(f.wordIsInvalid(f));
+    }
+
+    @Test
     @DisplayName("testing if marklist is converted to string correctly")
-    void markListToStringTest(){
+    void markListToStringTest() {
         Feedback f = new Feedback();
         List<Mark> markL = new ArrayList<>();
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
@@ -86,9 +87,6 @@ class FeedbackTest {
         assertEquals("W..R.", f.markListToString(markL, guessHolder));
     }
 
-
-
-
     static Stream<Arguments> provideHintExamples() {
         return Stream.of(
                 Arguments.of(new Feedback("banaan", "banana"), "BANA##"),
@@ -101,14 +99,15 @@ class FeedbackTest {
                 Arguments.of(new Feedback("aabbcc", "abcabc"), "A####C"),
                 Arguments.of(new Feedback("alianna", "liniaal"), "#######"),
                 Arguments.of(new Feedback("heren", "haren"), "H#REN"),
-                Arguments.of(new Feedback("eeaaae", "aaeeae"), "####AE")
+                Arguments.of(new Feedback("eeaaae", "aaeeae"), "####AE"),
+                Arguments.of(new Feedback("a", "aaaaa"), "X")
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideHintExamples")
     @DisplayName("test")
-    void test(Feedback feedback, String expectedHint){
+    void test(Feedback feedback, String expectedHint) {
         assertEquals(feedback.giveBetterHint(), expectedHint);
     }
 }
