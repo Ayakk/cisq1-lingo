@@ -1,8 +1,6 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import nl.hu.cisq1.lingo.words.domain.Word;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +12,9 @@ class GameTest {
     @DisplayName("checking game status at the end of a game")
     void checkGameStatusStopped(){
         Feedback f = new Feedback();
-        Word w = new Word();
-        Round r = new Round(f, w);
+        Round r = new Round(f);
 
-        Game g = new Game(r, w);
+        Game g = new Game(r);
         g.startGame("woord");
         assertEquals(g.getGameStatus(), GameStatus.STOPPED);
     }
@@ -26,10 +23,9 @@ class GameTest {
     @DisplayName("checking if score is calculated correctly")
     void checkGameScore(){
         Feedback f = new Feedback();
-        Word w = new Word();
-        Round r = new Round(f, w);
+        Round r = new Round(f);
 
-        Game g = new Game(r, w);
+        Game g = new Game(r);
         g.startGame("waord");
         g.startGame("woord");
         assertEquals(g.getScore(), 30);

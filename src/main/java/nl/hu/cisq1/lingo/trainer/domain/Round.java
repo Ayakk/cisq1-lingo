@@ -1,20 +1,18 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import nl.hu.cisq1.lingo.words.domain.Word;
-
-import java.util.Scanner;
-
 public class Round {
     private GameStatus gameStatus;
     private Feedback f;
-    private Word w;
     private int attempts = 0;
 
 
+    //todo remove first constructor when word is actually being used
+    public Round(Feedback feedback){
+        this.f=feedback;
+    }
 
-    public Round(Feedback feedback, Word word) {
-        this.f = feedback;
-        this.w = word;
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 
     public int startRound(String attempt){
@@ -25,7 +23,6 @@ public class Round {
         while (attempts <= 4 && gameStatus!=GameStatus.STOPPED) {
             System.out.println("Round " + attempts);
             f.setAttempt(attempt);
-            gameStatus=GameStatus.WAITING;
             if (f.getAttempt().equals(wordToGuess)) {
                 gameStatus=GameStatus.STOPPED;
                 System.out.println("Correct!");

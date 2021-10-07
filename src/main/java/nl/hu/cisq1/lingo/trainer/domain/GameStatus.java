@@ -4,6 +4,4 @@ public enum GameStatus {
     PLAYING,
     WAITING,
     STOPPED,
-    WON,
-    LOST
 }
