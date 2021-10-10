@@ -11,12 +11,16 @@ public class Round {
         this.f=feedback;
     }
 
+    public boolean isGameStopped(){
+        return gameStatus == GameStatus.STOPPED;
+    }
+
     public int startRound(String attempt){
         attempts = 0;
         gameStatus=GameStatus.PLAYING;
         String wordToGuess = "woord";
         System.out.println("The word has " + wordToGuess.length() + " letters");
-        while (attempts <= 4 && gameStatus!=GameStatus.STOPPED) {
+        while (attempts <= 4 && !isGameStopped()) {
             System.out.println("Round " + attempts);
             f.setAttempt(attempt);
             if (f.getAttempt().equals(wordToGuess)) {
