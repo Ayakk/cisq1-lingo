@@ -22,6 +22,13 @@ class FeedbackTest {
     }
 
     @Test
+    @DisplayName("Check if word is guessed if list has incorrect amount of values")
+    void wordIsGuessedWithIncorrectAmountOfValues(){
+        Feedback f = new Feedback("woord", List.of(Mark.CORRECT, Mark.CORRECT));
+        assertFalse(f.isWordGuessed(f));
+    }
+
+    @Test
     @DisplayName("Word is not guessed if some or all letters are incorrect")
     void wordIsNotGuessed() {
         Feedback f = new Feedback("woord", List.of(Mark.INVALID, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
@@ -34,6 +41,13 @@ class FeedbackTest {
     void guessIsInvalid() {
         Feedback f = new Feedback();
         assertTrue(f.wordIsInvalid("hek"));
+    }
+
+    @Test
+    @DisplayName("given word is invalid because it does not contain letters")
+    void guessIsInvalidWithWrongValue() {
+        Feedback f = new Feedback();
+        assertTrue(f.wordIsInvalid("1111"));
     }
 
     @Test
@@ -64,6 +78,8 @@ class FeedbackTest {
         f.setMarkList(List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
         assertFalse(f.wordIsInvalid("waara"));
     }
+
+
 
     @Test
     @DisplayName("testing if marklist is converted to string correctly")

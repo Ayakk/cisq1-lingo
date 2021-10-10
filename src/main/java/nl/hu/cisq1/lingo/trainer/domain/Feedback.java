@@ -50,13 +50,14 @@ public class Feedback {
     }
 
     public boolean isWordGuessed(Feedback feedback) {
-        //is Guessed starts on true
-        boolean isGuessed = true;
-        //for loop checks if ifGuessed should be put to false
+        System.out.println(feedback.getAttempt());
+        System.out.println(feedback.getWordToGuess());
+        System.out.println(feedback.getMarkList().size());
+        System.out.println(feedback.getWordToGuess().length());
+        boolean isGuessed = false;
         for (Mark m : feedback.getMarkList()) {
-            //checks if all marks are correct, if not isGuessed = false
-            if (!m.equals(Mark.CORRECT)) {
-                isGuessed = false;
+            if (!feedback.getMarkList().contains(Mark.INVALID) && !feedback.getMarkList().contains(Mark.ABSENT) && !feedback.getMarkList().contains(Mark.PRESENT) && feedback.getAttempt().length() == feedback.getMarkList().size()) {
+                isGuessed = true;
                 break;
             }
         }
@@ -66,7 +67,8 @@ public class Feedback {
 
     public boolean wordIsInvalid(String word) {
         //if the word length is outside what is allowed isInvalid will become true
-        return word.length() < 4 || word.length() > 6;
+        //word.matches checks if the string contains an integer
+        return word.length() < 4 || word.length() > 6 || word.matches(".*\\d.*");
     }
 
     public String giveBetterHint() {
