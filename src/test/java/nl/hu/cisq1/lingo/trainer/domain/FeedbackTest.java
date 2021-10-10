@@ -138,4 +138,13 @@ class FeedbackTest {
     void test(Feedback feedback, String expectedHint) {
         assertEquals(feedback.giveBetterHint(), expectedHint);
     }
+
+    @Test
+    @DisplayName("test givebetterhint when all marks are correct")
+    void betterHintAllCorrect(){
+        Feedback f = new Feedback();
+        f.setMarkList(List.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
+        f.setAttempt("woord");
+        assertEquals("WOORD", f.giveBetterHint());
+    }
 }

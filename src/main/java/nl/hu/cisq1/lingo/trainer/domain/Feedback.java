@@ -50,18 +50,7 @@ public class Feedback {
     }
 
     public boolean isWordGuessed(Feedback feedback) {
-        System.out.println(feedback.getAttempt());
-        System.out.println(feedback.getWordToGuess());
-        System.out.println(feedback.getMarkList().size());
-        System.out.println(feedback.getWordToGuess().length());
-        boolean isGuessed = false;
-        for (Mark m : feedback.getMarkList()) {
-            if (!feedback.getMarkList().contains(Mark.INVALID) && !feedback.getMarkList().contains(Mark.ABSENT) && !feedback.getMarkList().contains(Mark.PRESENT) && feedback.getAttempt().length() == feedback.getMarkList().size()) {
-                isGuessed = true;
-                break;
-            }
-        }
-        return isGuessed;
+        return !feedback.getMarkList().contains(Mark.INVALID) && !feedback.getMarkList().contains(Mark.ABSENT) && !feedback.getMarkList().contains(Mark.PRESENT) && feedback.getAttempt().length() == feedback.getMarkList().size();
     }
 
 
@@ -71,14 +60,18 @@ public class Feedback {
         return word.length() < 4 || word.length() > 6 || word.matches(".*\\d.*");
     }
 
+    public void checkIfWordToGuessAssigned(){
+        if (wordToGuess == null){
+            wordToGuess="woord";
+        }
+    }
+
     public String giveBetterHint() {
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
         List<Mark> markL = new ArrayList<>();
 
-        if (wordToGuess == null){
-            wordToGuess="woord";
-        }
+        checkIfWordToGuessAssigned();
 
 
         if (!wordIsInvalid(attempt)){
@@ -99,8 +92,7 @@ public class Feedback {
                     markL.add(Mark.CORRECT);
                 }
             } else if (guessHolder.size() != attemptHolder.size()) {
-                for (int i = 0; i < guessHolder.size(); i++)
-                    markL.add(Mark.INVALID);
+                markL.add(Mark.INVALID);
             } else {
                 for (int i = 0; i < guessHolder.size(); i++) {
                     if (attemptHolder.get(i).equals(guessHolder.get(i))) {
