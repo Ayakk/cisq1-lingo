@@ -19,13 +19,10 @@ public class Round {
         attempts = 0;
         gameStatus=GameStatus.PLAYING;
         String wordToGuess = "woord";
-        System.out.println("The word has " + wordToGuess.length() + " letters");
         while (attempts <= 4 && !isGameStopped()) {
-            System.out.println("Round " + attempts);
             f.setAttempt(attempt);
             if (f.getAttempt().equals(wordToGuess)) {
                 gameStatus=GameStatus.STOPPED;
-                System.out.println("Correct!");
                 return 5 * (5-attempts) +5;
             } else{
                 attempts++;
@@ -33,7 +30,6 @@ public class Round {
                 f.giveBetterHint();
             }
         }
-        System.out.println("Game has ended!");
         gameStatus=GameStatus.STOPPED;
         return 0;
     }

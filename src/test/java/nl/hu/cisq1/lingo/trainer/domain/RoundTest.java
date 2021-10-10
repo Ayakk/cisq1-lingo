@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,5 +28,15 @@ class RoundTest {
         Round r = new Round(f);
         assertEquals(r.startRound(attempt), pointsReturned);
     }
+
+    @Test
+    @DisplayName("check if boolean value corresponds with gamestatus")
+    void isGameStoppedTest(){
+        Feedback f = new Feedback();
+        Round r = new Round(f);
+        r.startRound("woord");
+        assertTrue(r.isGameStopped());
+    }
+
 
 }
