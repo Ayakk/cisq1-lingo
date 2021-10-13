@@ -1,17 +1,19 @@
-package nl.hu.cisq1.lingo.trainer.domain;
+package nl.hu.cisq1.lingo.words.domain;
 
-import nl.hu.cisq1.lingo.words.domain.Word;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Game {
-    private Round r;
+    @Id
+    @Column(unique = true)
+    private int gameId;
     private GameStatus gs;
     private int Score;
 
-
-
-    public Game(Round round) {
+    public Game() {
         gs = GameStatus.STOPPED;
-        this.r = round;
     }
 
     public GameStatus getGameStatus() {
@@ -22,9 +24,9 @@ public class Game {
         return Score;
     }
 
-    public void startGame(String attempt) {
+    public void startGame(String attempt, Round round) {
         gs = GameStatus.PLAYING;
-        Score += r.startRound(attempt);
+        Score += round.startRound(attempt);
         System.out.println("You got "+Score+" points!");
         gs = GameStatus.STOPPED;
     }

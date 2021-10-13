@@ -1,6 +1,6 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import nl.hu.cisq1.lingo.words.domain.Word;
+import nl.hu.cisq1.lingo.words.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +14,8 @@ class GameTest {
         Feedback f = new Feedback();
         Round r = new Round(f);
 
-        Game g = new Game(r);
-        g.startGame("woord");
+        Game g = new Game();
+        g.startGame("woord", r);
         assertEquals(g.getGameStatus(), GameStatus.STOPPED);
     }
 
@@ -25,9 +25,9 @@ class GameTest {
         Feedback f = new Feedback();
         Round r = new Round(f);
 
-        Game g = new Game(r);
-        g.startGame("waord");
-        g.startGame("woord");
+        Game g = new Game();
+        g.startGame("waord", r);
+        g.startGame("woord", r);
         assertEquals(g.getScore(), 30);
     }
 }
