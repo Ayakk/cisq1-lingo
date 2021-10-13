@@ -10,4 +10,16 @@ public class TrainerService {
     public TrainerService(WordService wordService) {
         this.wordService = wordService;
     }
+
+    public void startNewGame(){
+
+    }
+
+    public void guess(){
+
+    }
+
+    public void startNewRound(){
+
+    }
 }
