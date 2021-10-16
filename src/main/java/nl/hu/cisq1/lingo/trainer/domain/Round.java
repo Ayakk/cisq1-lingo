@@ -11,23 +11,27 @@ public class Round {
         this.f=feedback;
     }
 
+    public Round(){
+
+    }
+
     public boolean isGameStopped(){
         return gameStatus == GameStatus.STOPPED;
     }
 
-    public int startRound(String attempt){
+    public int startRound(String attempt, String wordToGuess){
+        Feedback feedback = new Feedback();
         attempts = 0;
         gameStatus=GameStatus.PLAYING;
-        String wordToGuess = "woord";
         while (attempts <= 4 && !isGameStopped()) {
-            f.setAttempt(attempt);
-            if (f.getAttempt().equals(wordToGuess)) {
+            feedback.setAttempt(attempt);
+            if (feedback.getAttempt().equals(wordToGuess)) {
                 gameStatus=GameStatus.STOPPED;
                 return 5 * (5-attempts) +5;
             } else{
                 attempts++;
-                f.setAttempt(attempt);
-                f.giveBetterHint();
+                feedback.setAttempt(attempt);
+                feedback.giveBetterHint();
             }
         }
         gameStatus=GameStatus.STOPPED;

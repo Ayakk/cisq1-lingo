@@ -14,7 +14,7 @@ class GameTest {
         Round r = new Round(f);
 
         Game g = new Game();
-        g.startGame("woord", r);
+        g.startGame("woord", r, "woord");
         assertEquals(g.getGameStatus(), GameStatus.STOPPED);
     }
 
@@ -25,8 +25,8 @@ class GameTest {
         Round r = new Round(f);
 
         Game g = new Game();
-        g.startGame("waord", r);
-        g.startGame("woord", r);
+        g.startGame("waord", r, "woord");
+        g.startGame("woord", r, "woord");
         assertEquals(g.getScore(), 30);
     }
 }
