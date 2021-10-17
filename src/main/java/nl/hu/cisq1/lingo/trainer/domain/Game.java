@@ -2,14 +2,17 @@ package nl.hu.cisq1.lingo.trainer.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "game")
 public class Game {
     @Id
-    @Column(unique = true)
+    @Column(unique = true, name = "gameID")
+    @GeneratedValue
     private int gameId;
     private GameStatus gs;
+    @Column(name = "score")
     private int Score;
 
     public Game() {

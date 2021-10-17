@@ -25,6 +25,18 @@ public class TrainerController {
         return new ResponseEntity<>("Round has been started", HttpStatus.OK);
     }
 
+    @PostMapping("/savegame")
+    public ResponseEntity<String> saveGame(){
+        trainerService.saveGame();
+        return new ResponseEntity<>("Game has been saved", HttpStatus.OK);
+    }
+
+    @PostMapping(("/loadgame/{id}"))
+    public ResponseEntity<String> loadGame(@PathVariable int id){
+        trainerService.loadGame(id);
+        return new ResponseEntity<>("Game has been loaded", HttpStatus.OK);
+    }
+
     @PostMapping(("/guess/{attempt}"))
     public ResponseEntity<String> guess(@PathVariable String attempt){
         String response = trainerService.guess(attempt);

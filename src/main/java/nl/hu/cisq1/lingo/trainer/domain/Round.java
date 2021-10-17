@@ -13,7 +13,7 @@ public class Round {
     }
 
     public Round(){
-
+        gameStatus=GameStatus.PLAYING;
     }
 
     public GameStatus getGameStatus() {
@@ -73,23 +73,24 @@ public class Round {
 
     public String newPlayRound(String attempt, String wordToGuess){
         Feedback feedback = new Feedback();
-        gameStatus=GameStatus.PLAYING;
+
         if (attempts <= 4 && !isGameStopped()) {
             System.out.println(attempts);
             feedback.setAttempt(attempt);
             if (feedback.getAttempt().equals(wordToGuess)) {
                 gameStatus=GameStatus.STOPPED;
                 score = calculateScore(attempts);
-                return feedback.giveBetterHint();
+                return "Gewonnen! U heeft " + score + " punten verdient!";
             } else{
                 feedback.setAttempt(attempt);
                 return feedback.giveBetterHint();
             }
-        } else {
+        } else if (!isGameStopped()){
             gameStatus=GameStatus.STOPPED;
             setScore(calculateScore(attempts));
-            return feedback.giveBetterHint();
+            return "Verloren! U heeft " + score + " punten verdient!";
         }
+        return "";
     }
 
     public int calculateScore(int attempts){
