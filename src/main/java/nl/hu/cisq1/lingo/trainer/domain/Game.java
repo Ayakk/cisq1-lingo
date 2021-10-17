@@ -24,10 +24,10 @@ public class Game {
         return Score;
     }
 
-    public void startGame(String attempt, Round round, String wordToGuess) {
+    public String startGame(String attempt, Round round, String wordToGuess) {
         gs = GameStatus.PLAYING;
         Score += round.startRound(attempt, wordToGuess);
-        System.out.println("You got "+Score+" points!");
         gs = GameStatus.STOPPED;
+        return "You got "+Score+" points!";
     }
 }

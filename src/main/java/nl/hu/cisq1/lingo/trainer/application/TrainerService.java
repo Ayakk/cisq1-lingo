@@ -18,10 +18,12 @@ public class TrainerService {
         this.wordService = wordService;
     }
 
-    public void startNewGame(String attempt){
+    public String startNewGame(String attempt){
+
         game = new Game();
         round = new Round();
-        game.startGame(attempt, round, wordService.provideRandomWord(5));
+//        wordService.provideRandomWord(5) <- add as third parameter to the line below
+        return game.startGame(attempt, round, "woord");
     }
 
     public void guess(){
