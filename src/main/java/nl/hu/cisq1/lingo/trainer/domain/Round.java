@@ -16,8 +16,36 @@ public class Round {
 
     }
 
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
+    public Feedback getF() {
+        return f;
+    }
+
+    public void setF(Feedback f) {
+        this.f = f;
+    }
+
+    public int getAttempts() {
+        return attempts;
+    }
+
+    public void setAttempts(int attempts) {
+        this.attempts = attempts;
+    }
+
     public int getScore() {
         return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public boolean isGameStopped(){
@@ -45,25 +73,28 @@ public class Round {
 
     public String newPlayRound(String attempt, String wordToGuess){
         Feedback feedback = new Feedback();
-        attempts = 0;
         gameStatus=GameStatus.PLAYING;
         if (attempts <= 4 && !isGameStopped()) {
+            System.out.println(attempts);
             feedback.setAttempt(attempt);
             if (feedback.getAttempt().equals(wordToGuess)) {
                 gameStatus=GameStatus.STOPPED;
-                score = 5 * (5-attempts) +5;
-                attempts++;
+                score = calculateScore(attempts);
                 return feedback.giveBetterHint();
             } else{
-                attempts++;
                 feedback.setAttempt(attempt);
                 return feedback.giveBetterHint();
             }
         } else {
             gameStatus=GameStatus.STOPPED;
-            score = 0;
+            setScore(calculateScore(attempts));
             return feedback.giveBetterHint();
         }
-
     }
+
+    public int calculateScore(int attempts){
+        setScore(5 * (5-attempts) +5);
+        return 5 * (5-attempts) +5;
+    }
+
 }

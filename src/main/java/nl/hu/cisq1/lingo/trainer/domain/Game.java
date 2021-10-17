@@ -16,6 +16,10 @@ public class Game {
         gs = GameStatus.STOPPED;
     }
 
+    public void setScore(int score) {
+        Score = score;
+    }
+
     public GameStatus getGameStatus() {
         return gs;
     }

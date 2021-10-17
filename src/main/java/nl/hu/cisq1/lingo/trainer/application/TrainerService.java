@@ -18,19 +18,18 @@ public class TrainerService {
         this.wordService = wordService;
     }
 
-    public String startNewGame(String attempt){
-        String response = startNewRound(attempt);
-        return response;
-    }
-
-    public void guess(){
-
-    }
-
-    public String startNewRound(String attempt){
+    public void startNewGame(){
         game = new Game();
+    }
+
+    public String guess(String attempt){
+        String returnVal =  round.newPlayRound(attempt, "woord");
+        round.setAttempts(round.getAttempts()+1);
+        return returnVal;
+    }
+
+    public void startNewRound(){
         round = new Round();
-//        wordService.provideRandomWord(5) <- add as third parameter to the line below
-        return game.startGame(attempt, round, "woord");
+        round.setAttempts(0);
     }
 }

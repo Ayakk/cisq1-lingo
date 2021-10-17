@@ -15,12 +15,19 @@ public class TrainerController {
 
     @PostMapping("/startgame")
     public ResponseEntity<String> startGame(){
+        trainerService.startNewGame();
         return new ResponseEntity<>("Started game", HttpStatus.OK);
     }
 
+    @PostMapping(("/newround"))
+    public ResponseEntity<String> startNewRound(){
+        trainerService.startNewRound();
+        return new ResponseEntity<>("Round has been started", HttpStatus.OK);
+    }
+
     @PostMapping(("/guess/{attempt}"))
-    public ResponseEntity<String> playRound(@PathVariable String attempt){
-        String response = trainerService.startNewGame(attempt);
+    public ResponseEntity<String> guess(@PathVariable String attempt){
+        String response = trainerService.guess(attempt);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
