@@ -4,6 +4,7 @@ public class Round {
     private GameStatus gameStatus;
     private Feedback f;
     private int attempts = 0;
+    private int score = 0;
 
 
     //todo remove first constructor when word is actually being used
@@ -15,11 +16,15 @@ public class Round {
 
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public boolean isGameStopped(){
         return gameStatus == GameStatus.STOPPED;
     }
 
-    public int startRound(String attempt, String wordToGuess){
+    public int playRound(String attempt, String wordToGuess){
         Feedback feedback = new Feedback();
         attempts = 0;
         gameStatus=GameStatus.PLAYING;
@@ -36,5 +41,29 @@ public class Round {
         }
         gameStatus=GameStatus.STOPPED;
         return 0;
+    }
+
+    public String newPlayRound(String attempt, String wordToGuess){
+        Feedback feedback = new Feedback();
+        attempts = 0;
+        gameStatus=GameStatus.PLAYING;
+        if (attempts <= 4 && !isGameStopped()) {
+            feedback.setAttempt(attempt);
+            if (feedback.getAttempt().equals(wordToGuess)) {
+                gameStatus=GameStatus.STOPPED;
+                score = 5 * (5-attempts) +5;
+                attempts++;
+                return feedback.giveBetterHint();
+            } else{
+                attempts++;
+                feedback.setAttempt(attempt);
+                return feedback.giveBetterHint();
+            }
+        } else {
+            gameStatus=GameStatus.STOPPED;
+            score = 0;
+            return feedback.giveBetterHint();
+        }
+
     }
 }

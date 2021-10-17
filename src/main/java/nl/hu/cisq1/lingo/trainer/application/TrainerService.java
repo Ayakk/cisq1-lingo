@@ -19,18 +19,18 @@ public class TrainerService {
     }
 
     public String startNewGame(String attempt){
-
-        game = new Game();
-        round = new Round();
-//        wordService.provideRandomWord(5) <- add as third parameter to the line below
-        return game.startGame(attempt, round, "woord");
+        String response = startNewRound(attempt);
+        return response;
     }
 
     public void guess(){
 
     }
 
-    public void startNewRound(){
-
+    public String startNewRound(String attempt){
+        game = new Game();
+        round = new Round();
+//        wordService.provideRandomWord(5) <- add as third parameter to the line below
+        return game.startGame(attempt, round, "woord");
     }
 }

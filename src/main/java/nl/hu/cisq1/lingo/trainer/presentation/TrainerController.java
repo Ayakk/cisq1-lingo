@@ -13,8 +13,13 @@ public class TrainerController {
     @Autowired
     private TrainerService trainerService;
 
+    @PostMapping("/startgame")
+    public ResponseEntity<String> startGame(){
+        return new ResponseEntity<>("Started game", HttpStatus.OK);
+    }
+
     @PostMapping(("/guess/{attempt}"))
-    public ResponseEntity<String> getID(@PathVariable String attempt){
+    public ResponseEntity<String> playRound(@PathVariable String attempt){
         String response = trainerService.startNewGame(attempt);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

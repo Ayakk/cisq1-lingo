@@ -26,8 +26,9 @@ public class Game {
 
     public String startGame(String attempt, Round round, String wordToGuess) {
         gs = GameStatus.PLAYING;
-        Score += round.startRound(attempt, wordToGuess);
+        String returnVal = round.newPlayRound(attempt, wordToGuess);
+        Score += round.getScore();
         gs = GameStatus.STOPPED;
-        return "You got "+Score+" points!";
+        return returnVal;
     }
 }
