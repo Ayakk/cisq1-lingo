@@ -42,6 +42,11 @@ public class TrainerService {
     }
 
     public void startNewRound(){
+        try {
+            game.setScore(game.getScore()+round.getScore());
+        } catch (Exception e){
+            System.out.println(e);
+        }
         round = new Round();
         System.out.println(game.getScore());
         round.setAttempts(0);
