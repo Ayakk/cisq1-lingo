@@ -32,11 +32,19 @@ class RoundTest {
 
     @Test
     @DisplayName("check if boolean value corresponds with gamestatus")
-    void isGameStoppedTest(){
+    void isGameStoppedTestWhenGuessIsCorrect(){
         Round r = new Round();
         r.setWordToGuess("woord");
         r.newPlayRound("woord");
         assertTrue(r.isGameStopped());
+    }
+
+    @Test
+    @DisplayName("check if boolean value corresponds with gamestatus")
+    void isGameNotStoppedWhileNotGuessing(){
+        Round r = new Round();
+        r.newPlayRound("perup");
+        assertFalse(r.isGameStopped());
     }
 
     @Test
@@ -52,8 +60,8 @@ class RoundTest {
     void isGameStoppedIfStatusIsChangedAndTooManyAttempts(){
         Round r = new Round();
         r.setAttempts(5);
-        r.setGameStatus(GameStatus.STOPPED);
-        assertTrue(r.isGameStopped());
+        r.setGameStatus(GameStatus.PLAYING);
+        assertFalse(r.checkIfGameContinues());
     }
 
     @Test
@@ -61,9 +69,8 @@ class RoundTest {
     void isGameStoppedAfterTooManyAttempts(){
         Round r = new Round();
         r.setAttempts(5);
-        r.newPlayRound("woard");
-        r.setWordToGuess("woord");
-        assertTrue(r.isGameStopped());
+        r.setGameStatus(GameStatus.STOPPED);
+        assertFalse(r.checkIfGameContinues());
     }
 
     @Test
@@ -71,7 +78,7 @@ class RoundTest {
     void checkAttemptsMethodBelow4(){
         Round r = new Round();
         r.setAttempts(3);
-        assertTrue(r.checkAmountofAttempts());
+        assertTrue(r.checkIfGameContinues());
     }
 
     @Test
@@ -79,6 +86,6 @@ class RoundTest {
     void checkAttemptsMethodOver4(){
         Round r = new Round();
         r.setAttempts(5);
-        assertFalse(r.checkAmountofAttempts());
+        assertFalse(r.checkIfGameContinues());
     }
 }

@@ -1,6 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.presentation;
 
 import nl.hu.cisq1.lingo.CiTestConfiguration;
+import nl.hu.cisq1.lingo.trainer.application.TrainerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private TrainerController trainerController;
 
     @Test
     @DisplayName("Test if starting new game is successful")
