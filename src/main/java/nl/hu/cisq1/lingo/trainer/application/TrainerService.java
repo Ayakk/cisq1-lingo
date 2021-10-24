@@ -51,6 +51,4 @@ public class TrainerService {
         System.out.println(game.getScore());
         round.setAttempts(0);
     }
-
-
 }
