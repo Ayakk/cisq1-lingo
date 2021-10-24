@@ -65,12 +65,13 @@ public class Feedback {
     }
 
     public String giveBetterHint() {
+        //gueesHolder contains the word that needs to be guessed
+        //attemptholder contains the attempt of the user
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
         List<Mark> markL = new ArrayList<>();
 
         checkIfWordToGuessAssigned();
-
 
         if (!wordIsInvalid(attempt)){
             for (int i = 0; i < getAttempt().length(); i++) {
@@ -78,7 +79,6 @@ public class Feedback {
                 //Process char
                 guessHolder.put(i, c);
             }
-
             for (int i = 0; i < wordToGuess.length(); i++) {
                 char c = wordToGuess.charAt(i);
                 //Process char
@@ -109,17 +109,21 @@ public class Feedback {
         return markListToString(markL, guessHolder);
     }
 
-    //convert list of feedback to string with hint
+    //convert list of feedback to a hintString
     public String markListToString(List<Mark> markL, HashMap<Integer, Character> guessHolder) {
         StringBuilder returnString = new StringBuilder();
         for (int i = 0; i < markL.size(); i++) {
             if (markL.get(i).equals(Mark.CORRECT)) {
+                //IF correct, correct letter gets placed
                 returnString.append(String.valueOf(guessHolder.get(i)).toUpperCase());
             } else if (markL.get(i).equals(Mark.PRESENT)) {
+                //IF present, # gets placed
                 returnString.append("#");
             } else if (markL.get(i).equals(Mark.INVALID)) {
+                //IF invalid, X gets placed
                 returnString.append("X");
             } else {
+                //Place . in every other case
                 returnString.append(".");
             }
         }

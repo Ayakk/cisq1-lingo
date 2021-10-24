@@ -26,7 +26,9 @@ class RoundTest {
     void checkPointsReturned(String attempt, int pointsReturned){
         Feedback f = new Feedback();
         Round r = new Round(f);
-        assertEquals(r.playRound(attempt, "woord"), pointsReturned);
+        r.setWordToGuess("woord");
+        r.newPlayRound(attempt);
+        assertEquals(r.getScore(), pointsReturned);
     }
 
     @Test
@@ -34,9 +36,8 @@ class RoundTest {
     void isGameStoppedTest(){
         Feedback f = new Feedback();
         Round r = new Round(f);
-        r.playRound("woord", "woord");
+        r.setWordToGuess("woord");
+        r.newPlayRound("woord");
         assertTrue(r.isGameStopped());
     }
-
-
 }

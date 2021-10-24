@@ -41,28 +41,8 @@ public class Round {
         return gameStatus == GameStatus.STOPPED;
     }
 
-    public int playRound(String attempt, String wordToGuess){
-        Feedback feedback = new Feedback();
-        attempts = 0;
-        gameStatus=GameStatus.PLAYING;
-        while (attempts <= 4 && !isGameStopped()) {
-            feedback.setAttempt(attempt);
-            if (feedback.getAttempt().equals(wordToGuess)) {
-                gameStatus=GameStatus.STOPPED;
-                return 5 * (5-attempts) +5;
-            } else{
-                attempts++;
-                feedback.setAttempt(attempt);
-                feedback.giveBetterHint();
-            }
-        }
-        gameStatus=GameStatus.STOPPED;
-        return 0;
-    }
-
     public String newPlayRound(String attempt){
         Feedback feedback = new Feedback();
-
         if (attempts <= 4 && !isGameStopped()) {
             System.out.println(attempts);
             feedback.setAttempt(attempt);
