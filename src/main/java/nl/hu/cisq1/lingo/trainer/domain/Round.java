@@ -41,6 +41,10 @@ public class Round {
         return gameStatus == GameStatus.STOPPED;
     }
 
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
     public String newPlayRound(String attempt){
         Feedback feedback = new Feedback();
         if (attempts <= 4 && !isGameStopped()) {
@@ -59,7 +63,7 @@ public class Round {
             setScore(calculateScore(attempts));
             return "Verloren! U heeft " + score + " punten verdient!";
         }
-        return "";
+        return null;
     }
 
     public int calculateScore(int attempts){

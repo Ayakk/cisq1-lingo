@@ -15,7 +15,7 @@ public class Game {
     private int gameId;
     private GameStatus gs;
     @Column(name = "score")
-    private int Score;
+    private int score;
     @Column(name = "toGuessWord")
     private String wordToGuess;
 
@@ -33,7 +33,7 @@ public class Game {
     }
 
     public void setScore(int score) {
-        Score = score;
+        this.score = score;
     }
 
     public GameStatus getGameStatus() {
@@ -41,14 +41,14 @@ public class Game {
     }
 
     public int getScore() {
-        return Score;
+        return score;
     }
 
     public String startGame(String attempt, Round round) {
         gs = GameStatus.PLAYING;
         round.setWordToGuess(wordToGuess);
         String returnVal = round.newPlayRound(attempt);
-        Score += round.getScore();
+        score += round.getScore();
         gs = GameStatus.STOPPED;
         return returnVal;
     }

@@ -38,4 +38,31 @@ class RoundTest {
         r.newPlayRound("woord");
         assertTrue(r.isGameStopped());
     }
+
+    @Test
+    @DisplayName("check if game is stopped if status is changed")
+    void isGameStoppedIfStatusIsChanged(){
+        Round r = new Round();
+        r.setGameStatus(GameStatus.STOPPED);
+        assertTrue(r.isGameStopped());
+    }
+
+    @Test
+    @DisplayName("check if game is stopped if status is changed and too many attempts were made")
+    void isGameStoppedIfStatusIsChangedAndTooManyAttempts(){
+        Round r = new Round();
+        r.setAttempts(5);
+        r.setGameStatus(GameStatus.STOPPED);
+        assertTrue(r.isGameStopped());
+    }
+
+    @Test
+    @DisplayName("check if game is stopped after too many attempts")
+    void isGameStoppedAfterTooManyAttempts(){
+        Round r = new Round();
+        r.setAttempts(5);
+        r.newPlayRound("woard");
+        r.setWordToGuess("woord");
+        assertTrue(r.isGameStopped());
+    }
 }
