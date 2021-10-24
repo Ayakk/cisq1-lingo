@@ -41,7 +41,7 @@ public class TrainerService {
         springGameRepository.save(game);
     }
 
-    public void startNewRound(){
+    public boolean startNewRound(){
         try {
             game.setScore(game.getScore()+round.getScore());
         } catch (Exception e){
@@ -51,5 +51,6 @@ public class TrainerService {
         round.setWordToGuess(game.getWordToGuess());
         System.out.println(game.getScore());
         round.setAttempts(0);
+        return true;
     }
 }
