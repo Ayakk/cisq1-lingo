@@ -21,7 +21,6 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>544382582698f8f328815a7becc95e3e1b0c8a44</sonar.projectKey>
         <sonar.exclusions>**/LingoApplication.java</sonar.exclusions>
-
     </properties>
 
     <dependencies>
