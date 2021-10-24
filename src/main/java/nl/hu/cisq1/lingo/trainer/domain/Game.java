@@ -1,5 +1,7 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.words.domain.Word;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +16,20 @@ public class Game {
     private GameStatus gs;
     @Column(name = "score")
     private int Score;
+    @Column(name = "toGuessWord")
+    private String wordToGuess;
 
-    public Game() {
+    public Game(){
+        this.wordToGuess = "woord";
+    }
+
+    public Game(String word) {
         gs = GameStatus.STOPPED;
+        this.wordToGuess=word;
+    }
+
+    public String getWordToGuess() {
+        return wordToGuess;
     }
 
     public void setScore(int score) {
@@ -31,9 +44,10 @@ public class Game {
         return Score;
     }
 
-    public String startGame(String attempt, Round round, String wordToGuess) {
+    public String startGame(String attempt, Round round) {
         gs = GameStatus.PLAYING;
-        String returnVal = round.newPlayRound(attempt, wordToGuess);
+        round.setWordToGuess(wordToGuess);
+        String returnVal = round.newPlayRound(attempt);
         Score += round.getScore();
         gs = GameStatus.STOPPED;
         return returnVal;

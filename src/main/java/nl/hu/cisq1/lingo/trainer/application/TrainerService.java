@@ -23,11 +23,11 @@ public class TrainerService {
     }
 
     public void startNewGame(){
-        game = new Game();
+        game = new Game(wordService.provideRandomWord(5));
     }
 
     public String guess(String attempt){
-        String returnVal =  round.newPlayRound(attempt, "woord");
+        String returnVal =  round.newPlayRound(attempt);
         round.setAttempts(round.getAttempts()+1);
         return returnVal;
     }
@@ -48,6 +48,7 @@ public class TrainerService {
             System.out.println(e);
         }
         round = new Round();
+        round.setWordToGuess(game.getWordToGuess());
         System.out.println(game.getScore());
         round.setAttempts(0);
     }

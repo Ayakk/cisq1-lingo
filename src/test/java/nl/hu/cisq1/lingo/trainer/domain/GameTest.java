@@ -13,8 +13,8 @@ class GameTest {
         Feedback f = new Feedback();
         Round r = new Round(f);
 
-        Game g = new Game();
-        g.startGame("woord", r, "woord");
+        Game g = new Game("woord");
+        g.startGame("woord", r);
         assertEquals(g.getGameStatus(), GameStatus.STOPPED);
     }
 
@@ -24,9 +24,9 @@ class GameTest {
         Feedback f = new Feedback();
         Round r = new Round(f);
 
-        Game g = new Game();
-        g.startGame("waord", r, "woord");
-        g.startGame("woord", r, "woord");
+        Game g = new Game("woord");
+        g.startGame("waord", r);
+        g.startGame("woord", r);
         assertEquals(g.getScore(), 30);
     }
 }

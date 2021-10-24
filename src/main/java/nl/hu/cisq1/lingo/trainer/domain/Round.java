@@ -5,6 +5,7 @@ public class Round {
     private Feedback f;
     private int attempts = 0;
     private int score = 0;
+    private String wordToGuess;
 
 
     //todo remove first constructor when word is actually being used
@@ -16,20 +17,8 @@ public class Round {
         gameStatus=GameStatus.PLAYING;
     }
 
-    public GameStatus getGameStatus() {
-        return gameStatus;
-    }
-
-    public void setGameStatus(GameStatus gameStatus) {
-        this.gameStatus = gameStatus;
-    }
-
-    public Feedback getF() {
-        return f;
-    }
-
-    public void setF(Feedback f) {
-        this.f = f;
+    public void setWordToGuess(String wordToGuess) {
+        this.wordToGuess = wordToGuess;
     }
 
     public int getAttempts() {
@@ -71,7 +60,7 @@ public class Round {
         return 0;
     }
 
-    public String newPlayRound(String attempt, String wordToGuess){
+    public String newPlayRound(String attempt){
         Feedback feedback = new Feedback();
 
         if (attempts <= 4 && !isGameStopped()) {
