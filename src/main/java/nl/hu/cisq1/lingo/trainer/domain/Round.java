@@ -2,16 +2,12 @@ package nl.hu.cisq1.lingo.trainer.domain;
 
 public class Round {
     private GameStatus gameStatus;
-    private Feedback f;
     private int attempts = 0;
     private int score = 0;
     private String wordToGuess;
 
 
     //todo remove first constructor when word is actually being used
-    public Round(Feedback feedback){
-        this.f=feedback;
-    }
 
     public Round(){
         gameStatus=GameStatus.PLAYING;
@@ -19,6 +15,10 @@ public class Round {
 
     public void setWordToGuess(String wordToGuess) {
         this.wordToGuess = wordToGuess;
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 
     public int getAttempts() {
