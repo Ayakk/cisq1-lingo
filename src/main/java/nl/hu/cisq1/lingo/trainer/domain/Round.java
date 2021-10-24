@@ -45,9 +45,13 @@ public class Round {
         this.gameStatus = gameStatus;
     }
 
+    public boolean checkAmountofAttempts(){
+        return attempts <= 4;
+    }
+
     public String newPlayRound(String attempt){
         Feedback feedback = new Feedback();
-        if (attempts <= 4 && !isGameStopped()) {
+        if (checkAmountofAttempts() && !isGameStopped()) {
             System.out.println(attempts);
             feedback.setAttempt(attempt);
             if (feedback.getAttempt().equals(wordToGuess)) {
@@ -62,8 +66,9 @@ public class Round {
             gameStatus=GameStatus.STOPPED;
             setScore(calculateScore(attempts));
             return "Verloren! U heeft " + score + " punten verdient!";
+        }else{
+            return "Er is iets misgegaan!";
         }
-        return null;
     }
 
     public int calculateScore(int attempts){

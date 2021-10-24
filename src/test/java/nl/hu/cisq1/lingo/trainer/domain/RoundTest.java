@@ -65,4 +65,20 @@ class RoundTest {
         r.setWordToGuess("woord");
         assertTrue(r.isGameStopped());
     }
+
+    @Test
+    @DisplayName("check if boolean attempt method returns true if attempts are below 4")
+    void checkAttemptsMethodBelow4(){
+        Round r = new Round();
+        r.setAttempts(3);
+        assertTrue(r.checkAmountofAttempts());
+    }
+
+    @Test
+    @DisplayName("check if boolean attempt method returns true if attempts are above 4")
+    void checkAttemptsMethodOver4(){
+        Round r = new Round();
+        r.setAttempts(5);
+        assertFalse(r.checkAmountofAttempts());
+    }
 }
