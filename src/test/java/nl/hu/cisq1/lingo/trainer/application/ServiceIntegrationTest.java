@@ -21,8 +21,6 @@ public class ServiceIntegrationTest {
     @Test
     @DisplayName("Testing guessing words using the service")
     void guessingWordTest(){
-        wordService = mock(WordService.class);
-        when(wordService.provideRandomWord(5)).thenReturn("appel");
         trainerService.startNewGame();
         trainerService.startNewRound();
         assertEquals(trainerService.guess("waord"), "W.ORD");
