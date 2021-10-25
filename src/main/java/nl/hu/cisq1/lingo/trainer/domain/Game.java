@@ -19,6 +19,8 @@ public class Game {
     @Column(name = "toGuessWord")
     private String wordToGuess;
 
+    //TODO dependency injection round
+
     public Game(){
         this.wordToGuess = "woord";
     }

@@ -23,12 +23,41 @@ public class ControllerIntegrationTest {
 
     @Test
     @DisplayName("Test if starting new game is successful")
-    void TestStartNewGame(){
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/startgame"))
-                    .andExpect(status().isOk());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    void testStartGame() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/startgame"))
+                .andExpect(status().isOk());
+
     }
+
+    @Test
+    @DisplayName("Test if starting new game is successful")
+    void testStartNewRound() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/startgame"));
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/newround"))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    @DisplayName("Test if guess is successful")
+    void testGuess() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/startgame"));
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/newround"));
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/guess/woord"))
+                .andExpect(status().isOk());
+
+    }
+
+//    @Test
+//    @DisplayName("Test if saving game is successful")
+//    void testSaveGame() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/startgame"));
+//        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/newround"));
+//        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/guess/woord"));
+//
+//        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/savegame"))
+//                .andExpect(status().isOk());
+//    }
+
+//TODO test exceptions
 }
