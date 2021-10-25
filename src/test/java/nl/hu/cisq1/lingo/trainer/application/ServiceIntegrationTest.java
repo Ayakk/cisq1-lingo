@@ -20,7 +20,7 @@ public class ServiceIntegrationTest {
 
     @Test
     @DisplayName("Testing guessing words using the service")
-    void guessingWordTest(){
+    void guessingWordTest() throws Exception{
         trainerService.startNewGame();
         trainerService.startNewRound();
         assertEquals(trainerService.guess("waord"), "W.ORD");
