@@ -37,8 +37,22 @@ public class TrainerService {
         g.ifPresent(value -> game = value);
     }
 
-    public void saveGame(){
-        springGameRepository.save(game);
+    public boolean saveGame(){
+        try{
+            springGameRepository.save(game);
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public Optional<Game> findgame(int id){
+        if (springGameRepository.findById(id).isPresent()){
+            Optional<Game> ga1 = springGameRepository.findById(id);
+            return ga1;
+        }
+        return null;
     }
 
     public boolean startNewRound(){
