@@ -10,9 +10,9 @@ import javax.persistence.Id;
 @Entity(name = "game")
 public class Game {
     @Id
-    @Column(unique = true, name = "gameID")
+    @Column(unique = true, name = "game_id")
     @GeneratedValue
-    private int gameId;
+    private int game_id;
     private GameStatus gs;
     @Column(name = "score")
     private int score;
