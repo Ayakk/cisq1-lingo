@@ -25,4 +25,13 @@ public class ServiceIntegrationTest {
         trainerService.startNewRound();
         assertEquals(trainerService.guess("waord"), "W.ORD");
     }
+
+//    @Test
+//    @DisplayName("Testing saving to db")
+//    void saveToDb() throws Exception{
+//        trainerService.startNewGame();
+//        trainerService.startNewRound();
+//        trainerService.guess("woord");
+//        trainerService.saveGame();
+//    }
 }
