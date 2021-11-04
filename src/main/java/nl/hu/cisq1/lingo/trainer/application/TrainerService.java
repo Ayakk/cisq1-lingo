@@ -56,11 +56,11 @@ public class TrainerService {
     }
 
     public boolean startNewRound(){
-        try {
-            game.setScore(game.getScore()+round.getScore());
-        } catch (Exception e){
-            System.out.println(e);
-        }
+//        try {
+//            game.setScore(game.getScore()+round.getScore());
+//        } catch (Exception e){
+//            System.out.println(e);
+//        }
         round = new Round();
         round.setWordToGuess(game.getWordToGuess());
         System.out.println(game.getScore());
