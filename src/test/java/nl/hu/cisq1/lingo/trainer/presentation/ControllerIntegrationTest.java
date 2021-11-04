@@ -58,6 +58,6 @@ public class ControllerIntegrationTest {
 //        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/savegame"))
 //                .andExpect(status().isOk());
 //    }
-
+//TODO do more mocks not multiple posts in 1 method
 //TODO test exceptions
 }

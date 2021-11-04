@@ -42,3 +42,4 @@ public class ServiceIntegrationTest {
         assertTrue(trainerService.saveGame());
     }
 }
+//todo return marklist + feedbacklist + guess
