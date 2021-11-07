@@ -16,7 +16,7 @@ Assessment of risk. Discussion of authentication and authorization.
 The project is secure against injections because the way it's built ensures that the data input is never in direct contact with the database. The data always goes through a certain amount of methods/filters.
 This insures that a SQL query will be picked apart before it can have any effect. 
 
-## A1:2017 Broken Authetication 
+## A2:2017 Broken Authetication 
 
 ### Description
 Authentication is “broken” when attackers are able to compromise passwords, keys or session tokens, user account information, and other details to assume user identities.
@@ -28,7 +28,7 @@ This could mean that I could load any game if I get the ID right.
 ### Counter-measures
 The project is currently not secure against this vulnerability. However this could be prevented by an additional form of identification which is unique to the user.  
 
-## A1:2017 Sensitive Data Exposure
+## A3:2017 Sensitive Data Exposure
 
 ### Description
 Sensitive data exposure occurs when an application, company, or other entity inadvertently exposes personal data. 
