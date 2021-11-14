@@ -1,11 +1,9 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.words.application.WordService;
 import nl.hu.cisq1.lingo.words.domain.Word;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "game")
 public class Game {
@@ -18,11 +16,25 @@ public class Game {
     private int score;
     @Column(name = "toGuessWord")
     private String wordToGuess;
+    @Transient
+    private Round round;
+    @Transient
+    private WordService wordService;
+    @Transient
+    private int nrCorrect =5;
 
     //TODO dependency injection round
 
     public Game(){
-        this.wordToGuess = "woord";
+
+    }
+
+    public Game(WordService ws){
+        this.wordService = ws;
+        round = new Round();
+        wordToGuess = wordService.provideRandomWord(5);
+        round.setWordToGuess(wordToGuess);
+        round.setAttempts(0);
     }
 
     public Game(String word) {
@@ -30,12 +42,24 @@ public class Game {
         this.wordToGuess=word;
     }
 
-    public String getWordToGuess() {
-        return wordToGuess;
+    public Round getRound() {
+        return round;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public int getNrCorrect() {
+        return nrCorrect;
+    }
+
+    public void setNrCorrect(int nrCorrect) {
+        this.nrCorrect = nrCorrect;
+    }
+
+    public void setWordToGuess(String wordToGuess) {
+        this.wordToGuess = wordToGuess;
+    }
+
+    public String getWordToGuess() {
+        return wordToGuess;
     }
 
     public GameStatus getGameStatus() {
@@ -46,9 +70,20 @@ public class Game {
         return score;
     }
 
+    public boolean checkIfRoundWon(){
+        return round.isRoundWon();
+    }
+
+    public void gameResetFNextRound(){
+        score += round.getScore();
+        System.out.println("TESTSCORE"+score);
+        round.setScore(0);
+        round.setAttempts(0);
+        round.setGameStatus(GameStatus.PLAYING);
+    }
+
     public String startGame(String attempt, Round round) {
         gs = GameStatus.PLAYING;
-        round.setWordToGuess(wordToGuess);
         String returnVal = round.newPlayRound(attempt);
         score += round.getScore();
         gs = GameStatus.STOPPED;

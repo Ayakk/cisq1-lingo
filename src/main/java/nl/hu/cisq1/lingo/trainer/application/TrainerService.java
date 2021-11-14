@@ -13,7 +13,6 @@ import java.util.Optional;
 public class TrainerService {
     private WordService wordService;
     private Game game;
-    private Round round;
 
     @Autowired
     private SpringGameRepository springGameRepository;
@@ -22,13 +21,33 @@ public class TrainerService {
         this.wordService = wordService;
     }
 
-    public void startNewGame(){
-        game = new Game(wordService.provideRandomWord(5));
+    public String startNewGame(){
+        game = new Game(wordService);
+        return game.getWordToGuess();
+    }
+
+    public String nextround(){
+        try{
+            if (game.checkIfRoundWon() && game.getNrCorrect() <= 7){
+                game.gameResetFNextRound();
+                int i = game.getNrCorrect()+1;
+                game.setNrCorrect(i);
+                String randoWord = wordService.provideRandomWord(i);
+                game.setWordToGuess(randoWord);
+                game.getRound().setWordToGuess(randoWord);
+                return game.getWordToGuess();
+            }else{
+                return "For some reason it's time to start a new game :) Have fun!";
+            }
+        }catch (Exception e){
+            return "For some reason it's time to start a new game :) Have fun!";
+        }
     }
 
     public String guess(String attempt){
-        String returnVal =  round.newPlayRound(attempt);
-        round.setAttempts(round.getAttempts()+1);
+        Round roundFromGame = game.getRound();
+        String returnVal =  roundFromGame.newPlayRound(attempt);
+        roundFromGame.setAttempts(roundFromGame.getAttempts()+1);
         return returnVal;
     }
 
@@ -53,18 +72,5 @@ public class TrainerService {
             return ga1;
         }
         return null;
-    }
-
-    public boolean startNewRound(){
-//        try {
-//            game.setScore(game.getScore()+round.getScore());
-//        } catch (Exception e){
-//            System.out.println(e);
-//        }
-        round = new Round();
-        round.setWordToGuess(game.getWordToGuess());
-        System.out.println(game.getScore());
-        round.setAttempts(0);
-        return true;
     }
 }

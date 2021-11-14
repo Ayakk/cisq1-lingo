@@ -75,7 +75,7 @@ class FeedbackTest {
     @DisplayName("Gives valid word but invalid list")
     void giveBadHintTest() {
         Feedback f = new Feedback();
-        f.setMarkList(List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
+        f.setMarkL(List.of(Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID, Mark.INVALID));
         assertFalse(f.wordIsInvalid("waara"));
     }
 
@@ -143,7 +143,7 @@ class FeedbackTest {
     @DisplayName("test givebetterhint when all marks are correct")
     void betterHintAllCorrect(){
         Feedback f = new Feedback();
-        f.setMarkList(List.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
+        f.setMarkL(List.of(Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT, Mark.CORRECT));
         f.setAttempt("woord");
         assertEquals("WOORD", f.giveBetterHint());
     }

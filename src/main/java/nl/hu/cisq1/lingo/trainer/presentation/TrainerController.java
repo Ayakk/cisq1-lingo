@@ -15,14 +15,14 @@ public class TrainerController {
 
     @PostMapping("/startgame")
     public ResponseEntity<String> startGame(){
-        trainerService.startNewGame();
-        return new ResponseEntity<>("Started game", HttpStatus.OK);
+        String returnString = trainerService.startNewGame();
+        return new ResponseEntity<>(returnString, HttpStatus.OK);
     }
 
-    @PostMapping(("/newround"))
-    public ResponseEntity<String> startNewRound(){
-        trainerService.startNewRound();
-        return new ResponseEntity<>("Round has been started", HttpStatus.OK);
+    @PostMapping("/nextround")
+    public ResponseEntity<String> nextround(){
+        String returnString = trainerService.nextround();
+        return new ResponseEntity<>(returnString, HttpStatus.OK);
     }
 
     @PostMapping("/savegame")

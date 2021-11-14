@@ -4,8 +4,7 @@ import java.util.*;
 
 public class Feedback {
     private String attempt;
-    private List<Mark> markList;
-    private HashMap<Integer, String> hintList = new HashMap<Integer, String>();
+    private List<Mark> markL;
     private String wordToGuess;
 
     public Feedback() {
@@ -23,8 +22,7 @@ public class Feedback {
 
     public Feedback(String attempt, List<Mark> markList) {
         this.attempt = attempt;
-        wordToGuess="woord";
-        this.markList = markList;
+        this.markL = markList;
     }
 
     public String getAttempt() {
@@ -35,12 +33,16 @@ public class Feedback {
         this.attempt = attempt;
     }
 
-    public List<Mark> getMarkList() {
-        return markList;
+    public void setWordToGuess(String wordToGuess) {
+        this.wordToGuess = wordToGuess;
     }
 
-    public void setMarkList(List<Mark> markList) {
-        this.markList = markList;
+    public List<Mark> getMarkL() {
+        return markL;
+    }
+
+    public void setMarkL(List<Mark> markL) {
+        this.markL = markL;
     }
 
     public String getWordToGuess() {
@@ -48,7 +50,7 @@ public class Feedback {
     }
 
     public boolean isWordGuessed(Feedback feedback) {
-        return !feedback.getMarkList().contains(Mark.INVALID) && !feedback.getMarkList().contains(Mark.ABSENT) && !feedback.getMarkList().contains(Mark.PRESENT) && feedback.getAttempt().length() == feedback.getMarkList().size();
+        return !feedback.getMarkL().contains(Mark.INVALID) && !feedback.getMarkL().contains(Mark.ABSENT) && !feedback.getMarkL().contains(Mark.PRESENT) && feedback.getAttempt().length() == feedback.getMarkL().size();
     }
 
 
@@ -69,7 +71,7 @@ public class Feedback {
         //attemptholder contains the attempt of the user
         HashMap<Integer, Character> guessHolder = new HashMap<Integer, Character>();
         HashMap<Integer, Character> attemptHolder = new HashMap<Integer, Character>();
-        List<Mark> markL = new ArrayList<>();
+        markL = new ArrayList<>();
 
         checkIfWordToGuessAssigned();
 
@@ -105,7 +107,7 @@ public class Feedback {
         } else{
             markL.add(Mark.INVALID);
         }
-        setMarkList(markL);
+        setMarkL(markL);
         return markListToString(markL, guessHolder);
     }
 

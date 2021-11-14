@@ -22,7 +22,6 @@ public class ServiceIntegrationTest {
     @DisplayName("Testing guessing words using the service")
     void guessingWordTest() throws Exception{
         trainerService.startNewGame();
-        trainerService.startNewRound();
         assertEquals(trainerService.guess("waord"), "W.ORD");
     }
 
@@ -37,7 +36,6 @@ public class ServiceIntegrationTest {
     @DisplayName("Testing finding game from db")
     void saveGame() throws Exception{
         trainerService.startNewGame();
-        trainerService.startNewRound();
         trainerService.guess("woord");
         assertTrue(trainerService.saveGame());
     }
