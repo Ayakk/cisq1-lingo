@@ -23,10 +23,4 @@ class TrainerServiceTest {
         verify(wordService, times(1)).provideRandomWord(5);
     }
 
-    @Test
-    @DisplayName("testing guess with trainerservice")
-    void guess() {
-        trainerService.startNewGame();
-        assertEquals("W.ORD", trainerService.guess("waord"));
-    }
 }

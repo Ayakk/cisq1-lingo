@@ -75,7 +75,7 @@ public class Round {
                 feedback.setAttempt(attempt);
                 String feedbackBetterHint = feedback.giveBetterHint();
                 String marklist = feedback.getMarkL().toString();
-                return "Attempt: " + attempt + "\n Feedback: " + feedbackBetterHint +"\n Marklist: " + marklist;
+                return "Attempt: " + attempt + "\nFeedback: " + feedbackBetterHint +"\nMarklist: " + marklist;
             }
         } else {
             gameStatus=GameStatus.STOPPED;

@@ -26,8 +26,11 @@ public class TrainerService {
         game = new Game(wordService);
         int n = game.getWordToGuess().length()-1;
         String existing = String.valueOf(game.getWordToGuess().charAt(0));
-        String result = existing + String.join("", Collections.nCopies(n, "."));
-        return result;
+        return existing + String.join("", Collections.nCopies(n, "."));
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public String nextround(){
