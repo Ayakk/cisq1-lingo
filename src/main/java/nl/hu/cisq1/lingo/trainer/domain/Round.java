@@ -1,9 +1,5 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import nl.hu.cisq1.lingo.words.application.WordService;
-import nl.hu.cisq1.lingo.words.data.SpringWordRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class Round {
     private GameStatus gameStatus;
     private int attempts = 0;
@@ -23,10 +19,6 @@ public class Round {
 
     public boolean isRoundWon() {
         return roundWon;
-    }
-
-    public void setRoundWon(boolean roundWon) {
-        this.roundWon = roundWon;
     }
 
     public GameStatus getGameStatus() {
@@ -75,7 +67,7 @@ public class Round {
                 feedback.setAttempt(attempt);
                 String feedbackBetterHint = feedback.giveBetterHint();
                 String marklist = feedback.getMarkL().toString();
-                return "Attempt: " + attempt + "\n Feedback: " + feedbackBetterHint +"\n Marklist: " + marklist;
+                return "Attempt: " + attempt + "\nFeedback: " + feedbackBetterHint +"\nMarklist: " + marklist;
             }
         } else {
             gameStatus=GameStatus.STOPPED;
