@@ -13,7 +13,6 @@ import java.util.Optional;
 public class TrainerService {
     private WordService wordService;
     private Game game;
-    private Round round;
 
     @Autowired
     private SpringGameRepository springGameRepository;
@@ -23,17 +22,14 @@ public class TrainerService {
     }
 
     public String startNewGame(){
-        game = new Game(wordService.provideRandomWord(5));
-        round = new Round();
-        round.setWordToGuess(game.getWordToGuess());
-        System.out.println(game.getScore());
-        round.setAttempts(0);
+        game = new Game(wordService);
         return game.getWordToGuess();
     }
 
     public String guess(String attempt){
-        String returnVal =  round.newPlayRound(attempt);
-        round.setAttempts(round.getAttempts()+1);
+        Round roundFromGame = game.getRound();
+        String returnVal =  roundFromGame.newPlayRound(attempt);
+        roundFromGame.setAttempts(roundFromGame.getAttempts()+1);
         return returnVal;
     }
 

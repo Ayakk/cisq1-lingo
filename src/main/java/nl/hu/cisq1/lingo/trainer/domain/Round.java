@@ -1,11 +1,14 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
+import nl.hu.cisq1.lingo.words.application.WordService;
+import nl.hu.cisq1.lingo.words.data.SpringWordRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class Round {
     private GameStatus gameStatus;
     private int attempts = 0;
     private int score = 0;
     private String wordToGuess;
-
 
     //todo remove first constructor when word is actually being used
 
@@ -53,7 +56,6 @@ public class Round {
         Feedback feedback = new Feedback();
         feedback.setWordToGuess(wordToGuess);
         if (checkIfGameContinues()) {
-            System.out.println(attempts);
             feedback.setAttempt(attempt);
             if (feedback.getAttempt().equals(wordToGuess)) {
                 gameStatus=GameStatus.STOPPED;
