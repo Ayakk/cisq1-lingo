@@ -27,14 +27,6 @@ class TrainerServiceTest {
     @DisplayName("testing guess with trainerservice")
     void guess() {
         trainerService.startNewGame();
-        trainerService.startNewRound();
         assertEquals("W.ORD", trainerService.guess("waord"));
-    }
-
-    @Test
-    @DisplayName("testing if new round starts sucessfully")
-    void startNewRound() {
-        trainerService.startNewGame();
-        assertTrue(trainerService.startNewRound());
     }
 }

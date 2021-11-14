@@ -51,6 +51,7 @@ public class Round {
 
     public String newPlayRound(String attempt){
         Feedback feedback = new Feedback();
+        feedback.setWordToGuess(wordToGuess);
         if (checkIfGameContinues()) {
             System.out.println(attempts);
             feedback.setAttempt(attempt);
@@ -60,7 +61,9 @@ public class Round {
                 return "Gewonnen! U heeft " + score + " punten verdient!";
             } else{
                 feedback.setAttempt(attempt);
-                return feedback.giveBetterHint();
+                String feedbackBetterHint = feedback.giveBetterHint();
+                String marklist = feedback.getMarkL().toString();
+                return "Attempt: " + attempt + "\n Feedback: " + feedbackBetterHint +"\n Marklist: " + marklist;
             }
         } else {
             gameStatus=GameStatus.STOPPED;

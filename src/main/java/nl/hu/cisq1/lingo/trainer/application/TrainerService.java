@@ -22,8 +22,13 @@ public class TrainerService {
         this.wordService = wordService;
     }
 
-    public void startNewGame(){
+    public String startNewGame(){
         game = new Game(wordService.provideRandomWord(5));
+        round = new Round();
+        round.setWordToGuess(game.getWordToGuess());
+        System.out.println(game.getScore());
+        round.setAttempts(0);
+        return game.getWordToGuess();
     }
 
     public String guess(String attempt){
@@ -53,18 +58,5 @@ public class TrainerService {
             return ga1;
         }
         return null;
-    }
-
-    public boolean startNewRound(){
-//        try {
-//            game.setScore(game.getScore()+round.getScore());
-//        } catch (Exception e){
-//            System.out.println(e);
-//        }
-        round = new Round();
-        round.setWordToGuess(game.getWordToGuess());
-        System.out.println(game.getScore());
-        round.setAttempts(0);
-        return true;
     }
 }

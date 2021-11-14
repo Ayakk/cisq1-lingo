@@ -15,14 +15,8 @@ public class TrainerController {
 
     @PostMapping("/startgame")
     public ResponseEntity<String> startGame(){
-        trainerService.startNewGame();
-        return new ResponseEntity<>("Started game", HttpStatus.OK);
-    }
-
-    @PostMapping(("/newround"))
-    public ResponseEntity<String> startNewRound(){
-        trainerService.startNewRound();
-        return new ResponseEntity<>("Round has been started", HttpStatus.OK);
+        String returnString = trainerService.startNewGame();
+        return new ResponseEntity<>(returnString, HttpStatus.OK);
     }
 
     @PostMapping("/savegame")
