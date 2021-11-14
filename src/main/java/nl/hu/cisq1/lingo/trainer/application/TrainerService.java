@@ -26,6 +26,24 @@ public class TrainerService {
         return game.getWordToGuess();
     }
 
+    public String nextround(){
+        try{
+            if (game.checkIfRoundWon() && game.getNrCorrect() <= 7){
+                game.gameResetFNextRound();
+                int i = game.getNrCorrect()+1;
+                game.setNrCorrect(i);
+                String randoWord = wordService.provideRandomWord(i);
+                game.setWordToGuess(randoWord);
+                game.getRound().setWordToGuess(randoWord);
+                return game.getWordToGuess();
+            }else{
+                return "For some reason it's time to start a new game :) Have fun!";
+            }
+        }catch (Exception e){
+            return "For some reason it's time to start a new game :) Have fun!";
+        }
+    }
+
     public String guess(String attempt){
         Round roundFromGame = game.getRound();
         String returnVal =  roundFromGame.newPlayRound(attempt);

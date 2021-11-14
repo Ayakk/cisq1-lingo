@@ -9,6 +9,7 @@ public class Round {
     private int attempts = 0;
     private int score = 0;
     private String wordToGuess;
+    private boolean roundWon;
 
     //todo remove first constructor when word is actually being used
 
@@ -18,6 +19,14 @@ public class Round {
 
     public void setWordToGuess(String wordToGuess) {
         this.wordToGuess = wordToGuess;
+    }
+
+    public boolean isRoundWon() {
+        return roundWon;
+    }
+
+    public void setRoundWon(boolean roundWon) {
+        this.roundWon = roundWon;
     }
 
     public GameStatus getGameStatus() {
@@ -60,6 +69,7 @@ public class Round {
             if (feedback.getAttempt().equals(wordToGuess)) {
                 gameStatus=GameStatus.STOPPED;
                 score = calculateScore(attempts);
+                roundWon = true;
                 return "Gewonnen! U heeft " + score + " punten verdient!";
             } else{
                 feedback.setAttempt(attempt);
@@ -70,6 +80,7 @@ public class Round {
         } else {
             gameStatus=GameStatus.STOPPED;
             setScore(calculateScore(attempts));
+            roundWon = false;
             return "Verloren! U heeft " + score + " punten verdient!";
         }
     }

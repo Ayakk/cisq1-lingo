@@ -20,6 +20,8 @@ public class Game {
     private Round round;
     @Transient
     private WordService wordService;
+    @Transient
+    private int nrCorrect =5;
 
     //TODO dependency injection round
 
@@ -29,8 +31,8 @@ public class Game {
 
     public Game(WordService ws){
         this.wordService = ws;
-        this.wordToGuess = wordService.provideRandomWord(5);
         round = new Round();
+        wordToGuess = wordService.provideRandomWord(5);
         round.setWordToGuess(wordToGuess);
         round.setAttempts(0);
     }
@@ -42,6 +44,18 @@ public class Game {
 
     public Round getRound() {
         return round;
+    }
+
+    public int getNrCorrect() {
+        return nrCorrect;
+    }
+
+    public void setNrCorrect(int nrCorrect) {
+        this.nrCorrect = nrCorrect;
+    }
+
+    public void setWordToGuess(String wordToGuess) {
+        this.wordToGuess = wordToGuess;
     }
 
     public String getWordToGuess() {
@@ -56,9 +70,17 @@ public class Game {
         return score;
     }
 
+    public boolean checkIfRoundWon(){
+        return round.isRoundWon();
+    }
+
+    public void gameResetFNextRound(){
+        round.setAttempts(0);
+        round.setGameStatus(GameStatus.PLAYING);
+    }
+
     public String startGame(String attempt, Round round) {
         gs = GameStatus.PLAYING;
-        round.setWordToGuess(wordToGuess);
         String returnVal = round.newPlayRound(attempt);
         score += round.getScore();
         gs = GameStatus.STOPPED;

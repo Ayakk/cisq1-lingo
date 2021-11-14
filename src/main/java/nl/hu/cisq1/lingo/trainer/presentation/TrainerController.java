@@ -19,6 +19,12 @@ public class TrainerController {
         return new ResponseEntity<>(returnString, HttpStatus.OK);
     }
 
+    @PostMapping("/nextround")
+    public ResponseEntity<String> nextround(){
+        String returnString = trainerService.nextround();
+        return new ResponseEntity<>(returnString, HttpStatus.OK);
+    }
+
     @PostMapping("/savegame")
     public ResponseEntity<String> saveGame(){
         trainerService.saveGame();
