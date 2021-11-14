@@ -7,6 +7,7 @@ import nl.hu.cisq1.lingo.words.application.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -23,7 +24,10 @@ public class TrainerService {
 
     public String startNewGame(){
         game = new Game(wordService);
-        return game.getWordToGuess();
+        int n = game.getWordToGuess().length()-1;
+        String existing = String.valueOf(game.getWordToGuess().charAt(0));
+        String result = existing + String.join("", Collections.nCopies(n, "."));
+        return result;
     }
 
     public String nextround(){
