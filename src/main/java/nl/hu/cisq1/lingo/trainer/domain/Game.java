@@ -75,6 +75,9 @@ public class Game {
     }
 
     public void gameResetFNextRound(){
+        score += round.getScore();
+        System.out.println("TESTSCORE"+score);
+        round.setScore(0);
         round.setAttempts(0);
         round.setGameStatus(GameStatus.PLAYING);
     }
