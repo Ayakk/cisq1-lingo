@@ -88,4 +88,13 @@ class RoundTest {
         r.setAttempts(5);
         assertFalse(r.checkIfGameContinues());
     }
+
+    @Test
+    @DisplayName("check if the else statement in the method returns the correct value")
+    void checkElseInNewPlayRound(){
+        Round r = new Round();
+        r.setWordToGuess("appel");
+        r.setAttempts(6);
+        assertEquals("Verloren! U heeft 0 punten verdient!", r.newPlayRound("appel"));
+    }
 }

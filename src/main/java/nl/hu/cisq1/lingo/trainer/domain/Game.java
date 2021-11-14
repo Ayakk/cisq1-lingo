@@ -74,6 +74,10 @@ public class Game {
         return round.isRoundWon();
     }
 
+    public void setRound(Round round) {
+        this.round = round;
+    }
+
     public void gameResetFNextRound(){
         score += round.getScore();
         System.out.println("TESTSCORE"+score);
